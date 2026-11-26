@@ -1,0 +1,2930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Rustique Restaurant — Exodus Dining | Nuwara Eliya, Sri Lanka</title>
+  <meta
+    name="description"
+    content="An intimate four-table boutique restaurant in Nuwara Eliya, Sri Lanka, serving authentic mom's home-cooked breakfasts, lunches, and dinners."
+  />
+
+  <!-- Browser Tab Favicon -->
+  <link id="siteFavicon" rel="icon" type="image/png" href="image_ba9726.png" />
+  <link id="siteAppleIcon" rel="apple-touch-icon" href="image_ba9726.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            'linen-light': '#FCF8F0',
+            'linen-warm': '#F5EFE2',
+            'paper': '#FFFDF8',
+            'espresso-dark': '#1A100B',
+            'espresso': '#2B1B13',
+            'espresso-soft': '#5C4438',
+            'brass': '#C49E5A',
+            'brass-dark': '#8F6A2E',
+            'brass-pale': '#E3CA94',
+            'hairline': 'rgba(143, 106, 46, 0.22)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --linen-light: #FCF8F0;
+      --linen-warm: #F5EFE2;
+      --paper: #FFFDF8;
+      --espresso-dark: #1A100B;
+      --espresso: #2B1B13;
+      --espresso-soft: #5C4438;
+      --brass: #C49E5A;
+      --brass-dark: #8F6A2E;
+      --brass-pale: #E3CA94;
+      --hairline: rgba(143, 106, 46, 0.22);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--linen-light);
+      color: var(--espresso);
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    .linen-grain {
+      background-image: radial-gradient(rgba(143, 106, 46, 0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    .hd-photo {
+      image-rendering: -webkit-optimize-contrast;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
+
+    .editorial-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+    }
+    .editorial-kicker::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--brass);
+    }
+
+    /* Header brand starts hidden at top and reveals on scroll */
+    #headerBrandReveal {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo), visibility 0.4s ease;
+    }
+    #siteHeader.is-scrolled #headerBrandReveal {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .nav-link {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(252, 248, 240, 0.85);
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.25s ease, border-color 0.25s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover,
+    .nav-link[aria-current="location"] {
+      color: var(--brass-pale);
+      border-bottom-color: var(--brass-pale);
+    }
+
+    .btn-brass {
+      background: linear-gradient(135deg, #D5B272 0%, #B78E48 100%);
+      color: #1A100B;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      box-shadow: 0 10px 24px rgba(26, 16, 11, 0.22);
+      transition: transform 0.28s var(--ease-out-expo), box-shadow 0.28s ease, filter 0.28s ease;
+    }
+    .btn-brass:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 14px 30px rgba(26, 16, 11, 0.3);
+    }
+
+    #scrollProgress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2.5px;
+      width: 0%;
+      z-index: 60;
+      background: linear-gradient(90deg, #B78E48, #F5E2B3);
+      transition: width 0.1s linear;
+    }
+
+    .hero-stage {
+      position: relative;
+      min-height: 820px;
+      background-color: #140C08;
+      overflow: hidden;
+    }
+    .hero-stage::after {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(227, 202, 148, 0.22);
+      pointer-events: none;
+      z-index: 8;
+    }
+    .hero-backdrop {
+      animation: heroSlowZoom 22s ease-in-out infinite alternate;
+    }
+    @keyframes heroSlowZoom {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.07); }
+    }
+    .hero-lantern-effect {
+      background: radial-gradient(circle at 68% 36%, rgba(245, 204, 122, 0.22), transparent 52%);
+      animation: lanternFlicker 5.5s ease-in-out infinite;
+    }
+    @keyframes lanternFlicker {
+      0%, 100% { opacity: 0.72; }
+      50% { opacity: 1; }
+    }
+    .hero-light-sweep {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 35%, rgba(245, 226, 179, 0.08) 50%, transparent 65%);
+      animation: sweepBeam 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes sweepBeam {
+      0%, 100% { transform: translateX(-60%); opacity: 0; }
+      50% { transform: translateX(60%); opacity: 1; }
+    }
+    .hero-overlay {
+      background: linear-gradient(
+        90deg,
+        rgba(20, 12, 8, 0.92) 0%,
+        rgba(20, 12, 8, 0.78) 54%,
+        rgba(20, 12, 8, 0.45) 100%
+      );
+    }
+
+    .sparkle-field {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .sparkle-ball {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 9999px;
+      background: #F5E2B3;
+      box-shadow: 0 0 10px rgba(245, 226, 179, 0.85);
+      opacity: 0;
+      animation: sparkleFloat 6s ease-in-out infinite;
+    }
+    .sparkle-ball.b1 { top: 22%; left: 18%; animation-delay: 0s; }
+    .sparkle-ball.b2 { top: 38%; left: 42%; animation-delay: 1.1s; }
+    .sparkle-ball.b3 { top: 64%; left: 26%; animation-delay: 2.2s; }
+    .sparkle-ball.b4 { top: 28%; left: 74%; animation-delay: 0.7s; }
+    .sparkle-ball.b5 { top: 52%; left: 82%; animation-delay: 1.8s; }
+    .sparkle-ball.b6 { top: 75%; left: 60%; animation-delay: 3.1s; }
+    .sparkle-ball.b7 { top: 16%; left: 56%; animation-delay: 2.7s; }
+    .sparkle-ball.b8 { top: 82%; left: 14%; animation-delay: 4.0s; }
+    @keyframes sparkleFloat {
+      0%, 100% { opacity: 0; transform: translateY(8px) scale(0.6); }
+      50% { opacity: 0.85; transform: translateY(-10px) scale(1.15); }
+    }
+
+    .hero-logo-circle {
+      display: inline-flex;
+      padding: 6px;
+      border-radius: 9999px;
+      border: 1px solid rgba(227, 202, 148, 0.55);
+      background: rgba(252, 248, 240, 0.08);
+      box-shadow:
+        0 18px 42px rgba(0, 0, 0, 0.52),
+        0 0 34px rgba(215, 189, 135, 0.3);
+      animation: logoCirclePulse 4s ease-in-out infinite;
+    }
+    @keyframes logoCirclePulse {
+      0%, 100% { box-shadow: 0 18px 42px rgba(0, 0, 0, 0.52), 0 0 24px rgba(215, 189, 135, 0.24); }
+      50% { box-shadow: 0 22px 48px rgba(0, 0, 0, 0.6), 0 0 40px rgba(227, 202, 148, 0.48); }
+    }
+
+    .hero-stagger > * {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: heroFadeUp 0.65s var(--ease-out-expo) forwards;
+    }
+    .hero-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+    .hero-stagger > *:nth-child(2) { animation-delay: 0.14s; }
+    .hero-stagger > *:nth-child(3) { animation-delay: 0.23s; }
+    .hero-stagger > *:nth-child(4) { animation-delay: 0.32s; }
+    .hero-stagger > *:nth-child(5) { animation-delay: 0.41s; }
+
+    @keyframes heroFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .gold-foil-text {
+      background: linear-gradient(110deg, #C9A663 15%, #F5E2B3 48%, #B89455 82%);
+      background-size: 220% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: goldFoilSweep 4.5s ease-in-out infinite;
+    }
+    @keyframes goldFoilSweep {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .live-pulse {
+      animation: liveDotPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes liveDotPulse {
+      0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+      50% { opacity: 0.75; transform: scale(1.15); box-shadow: 0 0 0 6px rgba(52, 211, 153, 0); }
+    }
+
+    .editorial-card {
+      position: relative;
+      background: var(--paper);
+      border: 1px solid var(--hairline);
+      box-shadow: 0 14px 38px rgba(43, 27, 19, 0.05);
+      transition: transform 0.38s var(--ease-out-expo), box-shadow 0.38s ease, border-color 0.38s ease;
+    }
+    .editorial-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(184, 148, 85, 0.55);
+      box-shadow: 0 22px 48px rgba(43, 27, 19, 0.1);
+    }
+    .service-icon-badge {
+      transition: transform 0.4s var(--ease-out-expo), background-color 0.3s ease, color 0.3s ease;
+    }
+    .editorial-card:hover .service-icon-badge {
+      transform: scale(1.08);
+      background-color: var(--espresso-dark);
+      color: var(--brass-pale);
+    }
+
+    .gallery-card {
+      overflow: hidden;
+      border: 1px solid var(--hairline);
+      background: var(--espresso-dark);
+      box-shadow: 0 18px 42px rgba(43, 27, 19, 0.12);
+      transition: transform 0.42s var(--ease-out-expo), box-shadow 0.42s ease, border-color 0.42s ease;
+    }
+    .gallery-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(227, 202, 148, 0.7);
+      box-shadow: 0 26px 52px rgba(43, 27, 19, 0.2);
+    }
+    .gallery-image {
+      transition: transform 0.8s var(--ease-out-expo), filter 0.6s ease;
+      filter: saturate(0.98) contrast(1.02);
+    }
+    .gallery-card:hover .gallery-image {
+      transform: scale(1.03);
+      filter: saturate(1.02) contrast(1.03);
+    }
+    .gallery-caption-wrap {
+      transition: transform 0.38s var(--ease-out-expo);
+    }
+    .gallery-card:hover .gallery-caption-wrap {
+      transform: translateY(-3px);
+    }
+
+    /* Full Uncropped Guest Experience Cards */
+    .exp-filter-btn {
+      transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+    }
+    .exp-filter-btn[aria-pressed="true"] {
+      background-color: var(--espresso-dark);
+      color: var(--brass-pale);
+      border-color: var(--espresso-dark);
+      box-shadow: 0 8px 20px rgba(26, 16, 11, 0.15);
+    }
+    .experience-card {
+      background: var(--paper);
+      border: 1px solid var(--hairline);
+      box-shadow: 0 14px 38px rgba(43, 27, 19, 0.06);
+      transition: transform 0.42s var(--ease-out-expo), box-shadow 0.42s ease, border-color 0.42s ease;
+    }
+    .experience-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(184, 148, 85, 0.6);
+      box-shadow: 0 24px 50px rgba(43, 27, 19, 0.13);
+    }
+    .experience-photo {
+      width: 100%;
+      height: auto;
+      display: block;
+      image-rendering: -webkit-optimize-contrast;
+      backface-visibility: hidden;
+      transform: translateZ(0);
+    }
+
+    .eq-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+    }
+    .eq-bars span {
+      width: 2.5px;
+      height: 4px;
+      background: var(--brass);
+      border-radius: 2px;
+      transition: height 0.2s ease;
+    }
+    .eq-playing .eq-bars span:nth-child(1) { animation: eqBounce 0.8s ease-in-out infinite; }
+    .eq-playing .eq-bars span:nth-child(2) { animation: eqBounce 0.6s ease-in-out 0.15s infinite; }
+    .eq-playing .eq-bars span:nth-child(3) { animation: eqBounce 0.9s ease-in-out 0.3s infinite; }
+    .eq-playing .eq-bars span:nth-child(4) { animation: eqBounce 0.7s ease-in-out 0.2s infinite; }
+    @keyframes eqBounce {
+      0%, 100% { height: 4px; }
+      50% { height: 16px; }
+    }
+
+    .sound-button {
+      transition: transform 0.28s var(--ease-out-expo), background-color 0.28s ease, border-color 0.28s ease, box-shadow 0.28s ease;
+    }
+    .sound-button:hover {
+      transform: translateY(-2px);
+    }
+    .sound-button[aria-pressed="true"] {
+      background: var(--espresso-dark);
+      color: var(--linen-light);
+      border-color: var(--brass);
+      box-shadow: 0 12px 28px rgba(26, 16, 11, 0.18);
+    }
+
+    .reveal-block {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.75s var(--ease-out-expo), transform 0.75s var(--ease-out-expo);
+    }
+    .reveal-block.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stagger-group > * {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s var(--ease-out-expo), transform 0.65s var(--ease-out-expo);
+    }
+    .stagger-group.is-visible > *:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.05s; }
+    .stagger-group.is-visible > *:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.12s; }
+    .stagger-group.is-visible > *:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.19s; }
+    .stagger-group.is-visible > *:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.26s; }
+    .stagger-group.is-visible > *:nth-child(5) { opacity: 1; transform: translateY(0); transition-delay: 0.33s; }
+    .stagger-group.is-visible > *:nth-child(6) { opacity: 1; transform: translateY(0); transition-delay: 0.40s; }
+    .stagger-group.is-visible > *:nth-child(7) { opacity: 1; transform: translateY(0); transition-delay: 0.47s; }
+
+    .page-fade-in {
+      animation: pageFadeIn 0.45s var(--ease-out-expo) forwards;
+    }
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #lightboxModal.is-open {
+      animation: lightboxFadeIn 0.3s ease forwards;
+    }
+    #lightboxModal.is-open #lightboxImg {
+      animation: lightboxZoomIn 0.38s var(--ease-out-expo) forwards;
+    }
+    @keyframes lightboxFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes lightboxZoomIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    #backToTop {
+      position: fixed;
+      right: 22px;
+      bottom: 24px;
+      z-index: 35;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(227, 202, 148, 0.45);
+      background: var(--espresso-dark);
+      color: var(--linen-light);
+      display: grid;
+      place-items: center;
+      border-radius: 2px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity 0.3s ease, transform 0.3s var(--ease-out-expo), border-color 0.3s ease, color 0.3s ease;
+    }
+    #backToTop:hover {
+      border-color: var(--brass-pale);
+      color: var(--brass-pale);
+      transform: translateY(-2px);
+    }
+    #backToTop.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 767px) {
+      .hero-stage { min-height: 760px; }
+      .hero-stage::after { inset: 10px; }
+      .hero-overlay {
+        background: linear-gradient(
+          180deg,
+          rgba(20, 12, 8, 0.56) 0%,
+          rgba(20, 12, 8, 0.86) 58%,
+          rgba(20, 12, 8, 0.96) 100%
+        );
+      }
+      #backToTop { bottom: 80px; right: 16px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-backdrop,
+      .hero-lantern-effect,
+      .hero-light-sweep,
+      .hero-stage::after,
+      .sparkle-ball,
+      .hero-logo-circle,
+      .gold-foil-text,
+      .live-pulse,
+      .hero-stagger > *,
+      .reveal-block,
+      .stagger-group > *,
+      .page-fade-in {
+        animation: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+      #headerBrandReveal {
+        transition: none !important;
+      }
+      .gold-foil-text {
+        color: #D7BD87;
+        -webkit-text-fill-color: #D7BD87;
+      }
+      * { scroll-behavior: auto !important; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "The Rustique Restaurant — Exodus Dining",
+    "url": "https://www.therustiquerestaurant.com/",
+    "email": "reservations@therustiquerestaurant.com",
+    "telephone": "+94702986611",
+    "description": "An intimate four-table boutique restaurant in Nuwara Eliya, Sri Lanka, serving authentic mom's home-cooked breakfasts, lunches, and dinners.",
+    "servesCuisine": ["Sri Lankan", "Western", "Mom's Home Cooking"],
+    "priceRange": "$$",
+    "acceptsReservations": true,
+    "image": "https://www.therustiquerestaurant.com/IMG_8895_beb93e.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Nuwara Eliya",
+      "addressRegion": "Central Province",
+      "addressCountry": "LK"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "07:30",
+        "closes": "10:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "12:00",
+        "closes": "15:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "18:30",
+        "closes": "22:00"
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="antialiased linen-grain">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[130] focus:bg-paper focus:text-espresso-dark focus:px-4 focus:py-2 focus:border focus:border-brass">
+    Skip to content
+  </a>
+  <div id="scrollProgress" aria-hidden="true"></div>
+
+  <!-- =========================================================
+       MAIN RESTAURANT SHOWCASE VIEW
+       ========================================================= -->
+  <div id="restaurant-view">
+    <header id="siteHeader" class="sticky top-0 z-40 bg-espresso-dark/95 backdrop-blur-md border-b border-brass-pale/20 shadow-lg">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20 gap-3">
+          <a
+            id="headerBrandReveal"
+            href="#home"
+            class="flex items-center gap-2.5 shrink-0"
+            aria-label="The Rustique Restaurant home"
+          >
+            <img
+              src="image_ba9726.png"
+              alt="The Rustique Restaurant circle logo"
+              onerror="this.onerror=null;this.src='IMG_3964_beb93e.jpeg';"
+              class="hd-photo w-10 h-10 rounded-full object-contain object-center bg-linen-light border border-brass-pale/70 shrink-0"
+            />
+            <div class="flex flex-col">
+              <span class="font-serif text-base xl:text-lg font-semibold tracking-[0.12em] text-linen-light uppercase leading-none whitespace-nowrap hover:text-brass-pale transition">
+                The Rustique Restaurant
+              </span>
+              <span class="text-[8.5px] tracking-[0.15em] text-brass-pale uppercase font-semibold mt-1 whitespace-nowrap">
+                Exodus Dining • Nuwara Eliya, Sri Lanka
+              </span>
+            </div>
+          </a>
+
+          <nav class="hidden xl:flex items-center gap-3.5 mx-auto" aria-label="Primary navigation">
+            <a class="nav-link" href="#about">Sanctuary</a>
+            <a class="nav-link" href="#climate">Weather</a>
+            <a class="nav-link" href="#timings">Hours</a>
+            <a class="nav-link" href="#menus">Kitchen</a>
+            <a class="nav-link" href="#experiences">Experiences</a>
+            <a class="nav-link" href="#film">Film</a>
+            <a class="nav-link" href="#gallery">Gallery</a>
+            <a class="nav-link" href="#location">Visit</a>
+          </nav>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <a
+              href="mailto:reservations@therustiquerestaurant.com"
+              class="hidden lg:inline-flex rounded-sm px-3 py-2 border border-brass-pale/45 text-linen-light hover:bg-brass-pale/15 text-[10px] font-bold uppercase tracking-[0.12em] items-center gap-1.5 whitespace-nowrap shrink-0 transition"
+              title="Email reservations@therustiquerestaurant.com"
+            >
+              <i class="fa-regular fa-envelope text-brass-pale text-xs"></i>
+              <span>Email Desk</span>
+            </a>
+            <button
+              type="button"
+              onclick="openBookingModal()"
+              class="hidden sm:inline-flex btn-brass rounded-sm px-3.5 py-2 text-[10px] items-center gap-1.5 whitespace-nowrap shrink-0"
+            >
+              <i class="fa-brands fa-whatsapp text-sm"></i>
+              <span>Enquire Table</span>
+            </button>
+            <button
+              id="mobileMenuBtn"
+              type="button"
+              class="xl:hidden p-2.5 text-linen-light hover:text-brass-pale transition shrink-0"
+              aria-label="Toggle navigation menu"
+              aria-expanded="false"
+              aria-controls="mobileMenu"
+              onclick="toggleMobileMenu()"
+            >
+              <i class="fa-solid fa-bars text-lg" id="menuIcon"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <nav id="mobileMenu" class="hidden xl:hidden bg-espresso-dark border-t border-brass-pale/20 px-5 pt-3 pb-6 space-y-1 text-linen-light" aria-label="Mobile navigation">
+        <a href="#about" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Our Sanctuary</a>
+        <a href="#climate" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Highland Weather</a>
+        <a href="#timings" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Service Hours</a>
+        <a href="#menus" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Mom’s Home Kitchen</a>
+        <a href="#experiences" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Guest Experiences</a>
+        <a href="#film" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Exodus in Motion</a>
+        <a href="#gallery" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Interior Gallery</a>
+        <a href="#soundscape" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Highland Soundscape</a>
+        <a href="#location" onclick="toggleMobileMenu(true)" class="block py-2.5 text-xs uppercase tracking-[0.16em] hover:text-brass-pale transition">Location &amp; Contact</a>
+        <a href="mailto:reservations@therustiquerestaurant.com" class="block py-2.5 text-xs tracking-[0.06em] text-brass-pale hover:text-linen-light transition">
+          <i class="fa-regular fa-envelope mr-2"></i>reservations@therustiquerestaurant.com
+        </a>
+        <button
+          type="button"
+          onclick="toggleMobileMenu(true); openBookingModal();"
+          class="w-full mt-4 btn-brass rounded-sm py-3.5 text-xs flex items-center justify-center gap-2"
+        >
+          <i class="fa-brands fa-whatsapp text-base"></i>
+          <span>Enquire Table on WhatsApp</span>
+        </button>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <!-- =========================================================
+           HERO SECTION
+           ========================================================= -->
+      <section id="home" class="hero-stage flex items-center py-20 lg:py-28">
+        <div class="absolute inset-0 z-0 overflow-hidden">
+          <img
+            id="heroImage"
+            src="IMG_8895_beb93e.jpg"
+            alt="Warm timber dining room and woven lantern glow at The Rustique Restaurant"
+            onerror="this.onerror=null;this.src='https://placehold.co/1920x1080/1A100B/FCF8F0?text=The+Rustique+Sanctuary';"
+            class="hero-backdrop hd-photo w-full h-full object-cover object-center"
+          />
+          <div class="hero-lantern-effect absolute inset-0"></div>
+          <div class="hero-light-sweep" aria-hidden="true"></div>
+          <div class="sparkle-field" aria-hidden="true">
+            <span class="sparkle-ball b1"></span>
+            <span class="sparkle-ball b2"></span>
+            <span class="sparkle-ball b3"></span>
+            <span class="sparkle-ball b4"></span>
+            <span class="sparkle-ball b5"></span>
+            <span class="sparkle-ball b6"></span>
+            <span class="sparkle-ball b7"></span>
+            <span class="sparkle-ball b8"></span>
+          </div>
+          <div class="hero-overlay absolute inset-0"></div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 w-full">
+          <div class="max-w-2xl hero-stagger">
+            <div class="mb-7">
+              <div class="hero-logo-circle">
+                <div class="w-48 h-48 sm:w-52 sm:h-52 rounded-full bg-linen-light flex items-center justify-center overflow-hidden">
+                  <img
+                    src="image_ba9726.png"
+                    alt="The Rustique Restaurant — Exodus Dining • Nuwara Eliya"
+                    onerror="this.onerror=null;this.src='IMG_3964_beb93e.jpeg';"
+                    class="hd-photo w-full h-full object-contain object-center scale-125"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <h1 class="font-serif text-5xl sm:text-7xl lg:text-[5.75rem] font-medium text-linen-light leading-[0.94] tracking-[-0.03em] mb-6">
+              Flavours Worth the <span class="italic font-normal gold-foil-text">Journey</span>
+            </h1>
+
+            <p class="text-linen-light/85 text-base sm:text-lg font-light leading-relaxed max-w-xl mb-9">
+              Tucked into the cool, misty hills of Nuwara Eliya lies an intimate four-table sanctuary. Every breakfast, lunch, and dinner is cooked from scratch with the warmth of mom’s own kitchen around fresh highland produce—shared personally with you via WhatsApp or email.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-3.5 sm:items-center">
+              <button
+                type="button"
+                onclick="openBookingModal()"
+                class="btn-brass rounded-sm px-8 py-4 text-xs flex items-center justify-center gap-2.5"
+              >
+                <i class="fa-brands fa-whatsapp text-base"></i>
+                <span>Enquire Table &amp; Today’s Menu</span>
+              </button>
+              <a
+                href="#experiences"
+                class="rounded-sm px-8 py-4 border border-brass-pale/70 text-linen-light hover:bg-brass-pale/15 hover:border-brass-pale font-bold text-xs uppercase tracking-[0.16em] text-center transition duration-300"
+              >
+                Guest Moments &amp; Table Stories
+              </a>
+            </div>
+
+            <div class="mt-12 pt-6 border-t border-brass-pale/25 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px] uppercase tracking-[0.14em] text-linen-light/80">
+              <span><i class="fa-solid fa-sun text-brass-pale mr-2"></i>Breakfast 7:30 – 10:30 AM</span>
+              <span class="hidden sm:inline text-brass-pale/40">•</span>
+              <span><i class="fa-solid fa-cloud-sun text-brass-pale mr-2"></i>Lunch 12:00 – 3:00 PM</span>
+              <span class="hidden sm:inline text-brass-pale/40">•</span>
+              <span><i class="fa-solid fa-moon text-brass-pale mr-2"></i>Dinner 6:30 – 10:00 PM</span>
+              <span class="hidden sm:inline text-brass-pale/40">•</span>
+              <span><i class="fa-solid fa-chair text-brass-pale mr-2"></i>Four Tables Only</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           LIVE NUWARA ELIYA SANCTUARY TELEMETRY BAR
+           ========================================================= -->
+      <div class="bg-espresso text-linen-light border-b border-brass-pale/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] tracking-[0.14em] uppercase">
+          <div class="flex items-center gap-3">
+            <span class="live-pulse inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="text-brass-pale font-semibold">Nuwara Eliya • 1,868 m</span>
+            <span class="text-linen-light/40">|</span>
+            <span id="slstClock" class="text-linen-light/90 font-medium">--:-- SLST</span>
+          </div>
+          <div id="sanctuaryServiceBanner" class="text-linen-light/85 text-center">
+            Four intimate tables • Advance WhatsApp or email availability check recommended
+          </div>
+          <button
+            type="button"
+            onclick="openBookingModal()"
+            class="text-brass-pale hover:text-linen-light font-bold underline underline-offset-4 transition"
+          >
+            Check Availability →
+          </button>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           THE SANCTUARY STORY
+           ========================================================= -->
+      <section id="about" class="py-24 lg:py-28 bg-linen-light border-b border-brass-dark/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 reveal-block">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div class="lg:col-span-6 space-y-6">
+              <span class="editorial-kicker">Handcrafted Warmth &amp; Heritage</span>
+              <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-espresso-dark leading-[1.02]">
+                A Cosy Sanctuary in <span class="italic font-normal text-brass-dark">Nuwara Eliya’s Hills</span>
+              </h2>
+              <p class="text-espresso-soft text-base leading-relaxed">
+                Step away from the mountain mist into a warmly lit dining haven. At <strong class="text-espresso-dark font-semibold">The Rustique Restaurant</strong>, rustic highland character meets heartfelt family hospitality—framed by hand-rubbed timber partitions, exposed heritage brick, and crochet-edged linens.
+              </p>
+              <p class="text-espresso-soft text-base leading-relaxed">
+                Woven rattan pendant lamps cast golden ripples across the ceiling while mom’s home-cooked recipes bring comforting Sri Lankan flavours and classic Western plates to an unhurried table.
+              </p>
+
+              <div class="grid grid-cols-3 gap-4 pt-6 border-t border-brass-dark/20 stagger-group">
+                <div>
+                  <span class="block font-serif text-3xl sm:text-4xl font-bold text-brass-dark">4 Tables</span>
+                  <span class="text-[10.5px] text-espresso-soft uppercase tracking-[0.16em] font-semibold">Private Intimacy</span>
+                </div>
+                <div>
+                  <span class="block font-serif text-3xl sm:text-4xl font-bold text-brass-dark">1,868 m</span>
+                  <span class="text-[10.5px] text-espresso-soft uppercase tracking-[0.16em] font-semibold">Highland Elevation</span>
+                </div>
+                <div>
+                  <span class="block font-serif text-3xl sm:text-4xl font-bold text-brass-dark">Homemade</span>
+                  <span class="text-[10.5px] text-espresso-soft uppercase tracking-[0.16em] font-semibold">Mom’s Recipes</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="lg:col-span-6 grid grid-cols-2 gap-4 sm:gap-6 stagger-group">
+              <div class="space-y-3">
+                <button
+                  type="button"
+                  onclick="openLightbox(0)"
+                  class="gallery-card block w-full rounded-sm text-left group"
+                  aria-label="Inspect woven rattan pendant and timber shelves photograph"
+                >
+                  <img
+                    src="IMG_8896_beb93e.jpg"
+                    alt="Mirrored shelves and woven pendant light in The Rustique"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x800/2B1B13/FCF8F0?text=Woven+Pendant';"
+                    class="gallery-image hd-photo w-full h-72 sm:h-96 object-cover"
+                  />
+                </button>
+                <p class="text-xs font-serif italic text-brass-dark text-center">Woven Rattan Pendant &amp; Timber</p>
+              </div>
+
+              <div class="space-y-3 pt-8 sm:pt-12">
+                <button
+                  type="button"
+                  onclick="openLightbox(2)"
+                  class="gallery-card block w-full rounded-sm text-left group"
+                  aria-label="Inspect slatted timber partition photograph"
+                >
+                  <img
+                    src="IMG_8895_beb93e.jpg"
+                    alt="Warm slatted timber partition and lace table setting"
+                    loading="lazy"
+                    onerror="this.onerror=null;this.src='https://placehold.co/600x800/2B1B13/FCF8F0?text=Timber+Partition';"
+                    class="gallery-image hd-photo w-full h-72 sm:h-96 object-cover"
+                  />
+                </button>
+                <p class="text-xs font-serif italic text-brass-dark text-center">Exposed Brick &amp; Crochet Linen</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           LIVE NUWARA ELIYA WEATHER
+           ========================================================= -->
+      <section id="climate" class="py-20 bg-linen-warm border-b border-brass-dark/15">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 reveal-block">
+          <div class="text-center mb-10">
+            <span class="editorial-kicker">The Highland Atmosphere</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-espresso-dark mt-2">
+              The Weather Outside
+            </h2>
+            <p class="text-sm text-espresso-soft mt-2">
+              Live mountain conditions in Nuwara Eliya right now
+            </p>
+          </div>
+
+          <div class="editorial-card rounded-sm p-6 sm:p-10">
+            <div class="flex flex-col lg:flex-row justify-between items-center gap-8">
+              <div class="text-center lg:text-left">
+                <div class="flex items-center justify-center lg:justify-start gap-4">
+                  <span id="weatherIcon" class="text-5xl transition-transform duration-500 hover:scale-110" aria-hidden="true">🌫️</span>
+                  <span id="weatherTemp" class="font-serif text-6xl sm:text-7xl font-semibold text-brass-dark">--°C</span>
+                </div>
+                <h3 id="weatherDescription" class="font-serif text-2xl sm:text-3xl text-espresso-dark mt-3">
+                  Gathering the highland forecast…
+                </h3>
+                <p id="weatherUpdated" class="text-xs text-espresso-soft mt-1.5" aria-live="polite">
+                  Connecting to Nuwara Eliya weather station
+                </p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3.5 w-full lg:max-w-xl stagger-group">
+                <div class="bg-linen-light rounded-sm p-4 border border-brass-dark/20 transition hover:border-brass">
+                  <span class="text-brass-dark text-[10px] font-bold uppercase tracking-[0.16em]">
+                    <i class="fa-solid fa-droplet mr-1.5"></i>Humidity
+                  </span>
+                  <p id="weatherHumidity" class="font-serif text-2xl sm:text-3xl font-semibold text-espresso-dark mt-1.5">--%</p>
+                </div>
+                <div class="bg-linen-light rounded-sm p-4 border border-brass-dark/20 transition hover:border-brass">
+                  <span class="text-brass-dark text-[10px] font-bold uppercase tracking-[0.16em]">
+                    <i class="fa-solid fa-wind mr-1.5"></i>Mountain Breeze
+                  </span>
+                  <p id="weatherWind" class="font-serif text-2xl sm:text-3xl font-semibold text-espresso-dark mt-1.5">-- km/h</p>
+                </div>
+                <div class="bg-linen-light rounded-sm p-4 border border-brass-dark/20 transition hover:border-brass">
+                  <span class="text-brass-dark text-[10px] font-bold uppercase tracking-[0.16em]">
+                    <i class="fa-solid fa-cloud-rain mr-1.5"></i>Precipitation
+                  </span>
+                  <p id="weatherRain" class="font-serif text-2xl sm:text-3xl font-semibold text-espresso-dark mt-1.5">-- mm</p>
+                </div>
+                <div class="bg-linen-light rounded-sm p-4 border border-brass-dark/20 transition hover:border-brass">
+                  <span class="text-brass-dark text-[10px] font-bold uppercase tracking-[0.16em]">
+                    <i class="fa-solid fa-cloud-sun mr-1.5"></i>Rain Chance
+                  </span>
+                  <p id="weatherChance" class="font-serif text-2xl sm:text-3xl font-semibold text-espresso-dark mt-1.5">--%</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-5 border-t border-brass-dark/15 flex flex-wrap items-center justify-between gap-3">
+              <p class="text-xs text-espresso-soft">
+                <i class="fa-solid fa-location-dot text-brass-dark mr-1.5"></i>
+                Nuwara Eliya, Central Province • Live Open-Meteo Telemetry
+              </p>
+              <button
+                id="weatherRefresh"
+                type="button"
+                onclick="loadHighlandWeather()"
+                class="text-xs font-bold uppercase tracking-[0.14em] text-brass-dark hover:text-espresso-dark transition"
+              >
+                <i class="fa-solid fa-rotate-right mr-1"></i>Refresh Weather
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           SERVICE TIMINGS
+           ========================================================= -->
+      <section id="timings" class="py-20 bg-linen-light border-b border-brass-dark/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 reveal-block">
+          <div class="text-center mb-12">
+            <span class="editorial-kicker">Daily Seatings</span>
+            <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-espresso-dark mt-2">
+              Breakfast, Lunch &amp; Dinner Timings
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-7 stagger-group">
+            <article class="editorial-card rounded-sm p-8 text-center flex flex-col justify-between">
+              <div>
+                <div class="service-icon-badge w-14 h-14 mx-auto mb-5 rounded-full bg-linen-warm border border-brass/40 flex items-center justify-center text-brass-dark text-xl">
+                  <i class="fa-solid fa-sun"></i>
+                </div>
+                <span class="text-[10.5px] font-bold uppercase tracking-[0.2em] text-brass-dark">Morning Service</span>
+                <h3 class="font-serif text-3xl font-semibold text-espresso-dark mt-1">Highland Breakfast</h3>
+                <p class="font-serif text-3xl font-bold text-brass-dark my-4">7:30 AM – 10:30 AM</p>
+                <p class="text-sm text-espresso-soft leading-relaxed mb-6">
+                  Freshly brewed high-grown Ceylon tea, warm homemade bakes, and seasonal mountain fruit prepared fresh to order from mom’s kitchen in the crisp highland air.
+                </p>
+              </div>
+              <div>
+                <button
+                  type="button"
+                  onclick="openBookingModal('Morning Breakfast Seating')"
+                  class="text-xs font-bold uppercase tracking-[0.16em] text-espresso-dark border-b border-brass pb-1 hover:text-brass-dark transition"
+                >
+                  Enquire Breakfast &amp; Menu →
+                </button>
+              </div>
+            </article>
+
+            <article class="editorial-card rounded-sm p-8 text-center flex flex-col justify-between">
+              <div>
+                <div class="service-icon-badge w-14 h-14 mx-auto mb-5 rounded-full bg-linen-warm border border-brass/40 flex items-center justify-center text-brass-dark text-xl">
+                  <i class="fa-solid fa-cloud-sun"></i>
+                </div>
+                <span class="text-[10.5px] font-bold uppercase tracking-[0.2em] text-brass-dark">Midday Service</span>
+                <h3 class="font-serif text-3xl font-semibold text-espresso-dark mt-1">Highland Lunch</h3>
+                <p class="font-serif text-3xl font-bold text-brass-dark my-4">12:00 PM – 3:00 PM</p>
+                <p class="text-sm text-espresso-soft leading-relaxed mb-6">
+                  Unhurried afternoon dining featuring authentic mom-cooked Sri Lankan rice &amp; curry spreads or comforting Western plates made from fresh Nuwara Eliya harvest.
+                </p>
+              </div>
+              <div>
+                <button
+                  type="button"
+                  onclick="openBookingModal('Midday Lunch Seating')"
+                  class="text-xs font-bold uppercase tracking-[0.16em] text-espresso-dark border-b border-brass pb-1 hover:text-brass-dark transition"
+                >
+                  Enquire Lunch &amp; Menu →
+                </button>
+              </div>
+            </article>
+
+            <article class="editorial-card rounded-sm p-8 text-center flex flex-col justify-between">
+              <div>
+                <div class="service-icon-badge w-14 h-14 mx-auto mb-5 rounded-full bg-linen-warm border border-brass/40 flex items-center justify-center text-brass-dark text-xl">
+                  <i class="fa-solid fa-moon"></i>
+                </div>
+                <span class="text-[10.5px] font-bold uppercase tracking-[0.2em] text-brass-dark">Evening Service</span>
+                <h3 class="font-serif text-3xl font-semibold text-espresso-dark mt-1">Boutique Dinner</h3>
+                <p class="font-serif text-3xl font-bold text-brass-dark my-4">6:30 PM – 10:00 PM</p>
+                <p class="text-sm text-espresso-soft leading-relaxed mb-6">
+                  Woven pendant glow, exposed heritage brick, and comforting multi-course home-cooked dinners prepared with care and shared directly via WhatsApp or email ahead of your evening.
+                </p>
+              </div>
+              <div>
+                <button
+                  type="button"
+                  onclick="openBookingModal('Evening Dinner Seating')"
+                  class="text-xs font-bold uppercase tracking-[0.16em] text-espresso-dark border-b border-brass pb-1 hover:text-brass-dark transition"
+                >
+                  Enquire Dinner &amp; Menu →
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           MOM'S HOME-COOKED DINING
+           ========================================================= -->
+      <section id="menus" class="py-24 bg-linen-warm border-b border-brass-dark/15">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-10 reveal-block">
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="editorial-kicker">Heartfelt Home Cooking</span>
+            <h2 class="font-serif text-4xl sm:text-6xl font-semibold text-espresso-dark mt-2">
+              Cooked with Care from Mom’s Kitchen
+            </h2>
+            <p class="text-sm sm:text-base text-espresso-soft mt-3 leading-relaxed">
+              Rather than publishing a rigid commercial menu, every meal at The Rustique is lovingly prepared from scratch using cherished family recipes, the morning’s freshest Nuwara Eliya harvest, and your personal preferences.
+            </p>
+          </div>
+
+          <div class="editorial-card rounded-sm p-7 sm:p-12 bg-paper">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-8 border-b border-brass-dark/20">
+              <div class="lg:col-span-7 space-y-4">
+                <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-brass-dark block">
+                  Authentic Mom’s Food • Shared Personally via WhatsApp or Email
+                </span>
+                <h3 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso-dark leading-tight">
+                  A Home-Cooked Menu Tailored Exclusively to Your Table
+                </h3>
+                <p class="text-sm sm:text-base text-espresso-soft leading-relaxed">
+                  When you send us a table availability enquiry on WhatsApp or write to <a href="mailto:reservations@therustiquerestaurant.com" class="font-semibold text-brass-dark underline underline-offset-4 hover:text-espresso-dark transition">reservations@therustiquerestaurant.com</a>, we share what’s cooking fresh in mom’s kitchen for breakfast, lunch, or dinner—allowing us to adjust spice levels, vegetarian dishes, and family favourites before you arrive.
+                </p>
+              </div>
+
+              <div class="lg:col-span-5 bg-linen-warm/80 border border-brass-dark/20 rounded-sm p-6 space-y-4">
+                <span class="text-[10.5px] font-bold uppercase tracking-[0.2em] text-brass-dark block">
+                  How Your Menu Is Shared
+                </span>
+                <ul class="text-xs sm:text-sm text-espresso-dark space-y-3 stagger-group">
+                  <li class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-espresso-dark text-brass-pale flex items-center justify-center font-serif font-bold text-xs shrink-0 mt-0.5">1</span>
+                    <span>Send your preferred date, meal service (breakfast, lunch, or dinner), and food preference via WhatsApp or email.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-espresso-dark text-brass-pale flex items-center justify-center font-serif font-bold text-xs shrink-0 mt-0.5">2</span>
+                    <span>Receive today’s homemade Sri Lankan &amp; Western dishes personally before your seating.</span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="w-6 h-6 rounded-full bg-espresso-dark text-brass-pale flex items-center justify-center font-serif font-bold text-xs shrink-0 mt-0.5">3</span>
+                    <span>Confirm your choices so every dish is cooked fresh just for your table.</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-8 stagger-group">
+              <div class="p-5 bg-linen-light border border-brass-dark/15 rounded-sm space-y-2 transition duration-300 hover:-translate-y-1 hover:border-brass/50">
+                <span class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-brass-dark block">7:30 – 10:30 AM</span>
+                <h4 class="font-serif text-2xl font-semibold text-espresso-dark">Highland Breakfast</h4>
+                <p class="text-xs sm:text-sm text-espresso-soft leading-relaxed">
+                  Warm homemade Sri Lankan morning favourites, fresh mountain fruit, baked sourdough, and single-estate Ceylon tea.
+                </p>
+              </div>
+              <div class="p-5 bg-linen-light border border-brass-dark/15 rounded-sm space-y-2 transition duration-300 hover:-translate-y-1 hover:border-brass/50">
+                <span class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-brass-dark block">12:00 – 3:00 PM</span>
+                <h4 class="font-serif text-2xl font-semibold text-espresso-dark">Highland Lunch</h4>
+                <p class="text-xs sm:text-sm text-espresso-soft leading-relaxed">
+                  Soulful mom-cooked Sri Lankan rice &amp; curry feasts or comforting homemade Western plates crafted from crisp hill-country vegetables.
+                </p>
+              </div>
+              <div class="p-5 bg-linen-light border border-brass-dark/15 rounded-sm space-y-2 transition duration-300 hover:-translate-y-1 hover:border-brass/50">
+                <span class="text-[10.5px] font-bold uppercase tracking-[0.18em] text-brass-dark block">6:30 – 10:00 PM</span>
+                <h4 class="font-serif text-2xl font-semibold text-espresso-dark">Highland Dinner</h4>
+                <p class="text-xs sm:text-sm text-espresso-soft leading-relaxed">
+                  Multi-course home-cooked evening meals, slow-simmered Ceylon curries, and traditional desserts shared privately ahead of your visit.
+                </p>
+              </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-brass-dark/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <p class="text-xs text-espresso-soft">
+                Dietary preferences, mild spice levels, vegetarian meals &amp; children’s portions are warmly accommodated.
+              </p>
+              <button
+                type="button"
+                onclick="openBookingModal()"
+                class="btn-brass rounded-sm px-7 py-3.5 text-xs flex items-center gap-2 shrink-0"
+              >
+                <i class="fa-brands fa-whatsapp text-base"></i>
+                <span>Request Today’s Menu</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           GUEST EXPERIENCES — FULL UNCROPPED VIEW + EXODUS FILLERS
+           ========================================================= -->
+      <section id="experiences" class="py-24 bg-linen-light border-b border-brass-dark/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 reveal-block">
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-6">
+            <div class="max-w-2xl">
+              <span class="editorial-kicker">Stories Around Our Four Tables</span>
+              <h2 class="font-serif text-4xl sm:text-6xl font-semibold text-espresso-dark mt-2 leading-[1.03]">
+                Guest <span class="italic font-normal text-brass-dark">Experiences</span>
+              </h2>
+              <p class="text-sm sm:text-base text-espresso-soft mt-3 leading-relaxed">
+                Every photograph is displayed in full view—from morning tea and warm rotis in the Nuwara Eliya mist to evening feasts shared around our four intimate tables.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5" role="group" aria-label="Filter guest experiences by meal seating">
+              <button
+                type="button"
+                onclick="filterExperiences('all')"
+                data-exp-filter="all"
+                aria-pressed="true"
+                class="exp-filter-btn px-4 py-2.5 rounded-sm border border-brass-dark/30 bg-paper text-espresso-dark text-[11px] font-bold uppercase tracking-[0.15em]"
+              >
+                All Moments
+              </button>
+              <button
+                type="button"
+                onclick="filterExperiences('breakfast')"
+                data-exp-filter="breakfast"
+                aria-pressed="false"
+                class="exp-filter-btn px-4 py-2.5 rounded-sm border border-brass-dark/30 bg-paper text-espresso-dark text-[11px] font-bold uppercase tracking-[0.15em]"
+              >
+                <i class="fa-solid fa-sun text-brass-dark mr-1.5"></i>Breakfast
+              </button>
+              <button
+                type="button"
+                onclick="filterExperiences('dinner')"
+                data-exp-filter="dinner"
+                aria-pressed="false"
+                class="exp-filter-btn px-4 py-2.5 rounded-sm border border-brass-dark/30 bg-paper text-espresso-dark text-[11px] font-bold uppercase tracking-[0.15em]"
+              >
+                <i class="fa-solid fa-moon text-brass-dark mr-1.5"></i>Dinner
+              </button>
+            </div>
+          </div>
+
+          <!-- Featured Evening Feast Spotlight Card (Full Uncropped Image) -->
+          <article
+            data-exp-category="dinner"
+            class="experience-card rounded-sm overflow-hidden mb-8 grid grid-cols-1 lg:grid-cols-12 items-stretch"
+          >
+            <button
+              type="button"
+              onclick="openLightbox(11)"
+              class="lg:col-span-7 relative bg-espresso-dark text-left group block w-full"
+              aria-label="Enlarge full-house evening dinner spread photograph"
+            >
+              <img
+                src="Rustique_Dinner.jpg"
+                alt="Guests toasting over a vibrant multi-dish Sri Lankan rice and curry dinner at The Rustique"
+                loading="lazy"
+                class="experience-photo"
+              />
+              <span class="absolute top-4 left-4 px-3 py-1.5 rounded-sm bg-espresso-dark/90 border border-brass-pale/45 text-[10px] font-bold uppercase tracking-[0.18em] text-brass-pale">
+                <i class="fa-solid fa-moon mr-1.5"></i>Boutique Dinner • Four Tables Full
+              </span>
+              <span class="absolute bottom-4 right-4 px-3 py-1.5 rounded-sm bg-espresso-dark/85 text-linen-light text-[10px] font-semibold uppercase tracking-[0.14em] opacity-90 group-hover:text-brass-pale transition">
+                <i class="fa-solid fa-expand mr-1.5"></i>Enlarge
+              </span>
+            </button>
+
+            <div class="lg:col-span-5 p-7 sm:p-10 flex flex-col justify-between bg-paper">
+              <div class="space-y-4">
+                <span class="text-[10.5px] font-bold uppercase tracking-[0.2em] text-brass-dark block">
+                  Evening Seating • 6:30 PM – 10:00 PM
+                </span>
+                <h3 class="font-serif text-3xl sm:text-4xl font-semibold text-espresso-dark leading-tight">
+                  “A Toast to Warmth &amp; Home-Cooked Sri Lankan Flavours”
+                </h3>
+                <blockquote class="text-sm sm:text-base text-espresso-soft italic leading-relaxed border-l-2 border-brass pl-4">
+                  “All four tables were glowing under the woven lanterns—glasses raised over yellow rice, fragrant curries, and homemade sambols that tasted just like a family celebration in the hills.”
+                </blockquote>
+                <p class="text-xs text-espresso-soft leading-relaxed">
+                  Travellers from around the world gathered in our inner alcove for an unhurried multi-bowl dinner prepared fresh from mom’s kitchen.
+                </p>
+              </div>
+
+              <div class="pt-6 mt-6 border-t border-brass-dark/15 flex items-center justify-between gap-3">
+                <span class="text-[11px] font-bold uppercase tracking-[0.16em] text-espresso-dark">
+                  Inner Alcove &amp; Main Room
+                </span>
+                <button
+                  type="button"
+                  onclick="openBookingModal('Evening Dinner Seating')"
+                  class="text-xs font-bold uppercase tracking-[0.14em] text-brass-dark hover:text-espresso-dark underline underline-offset-4 transition"
+                >
+                  Book Dinner →
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Upper 3-Column Grid + Exodus Dining Note in Column 3's Lower Space -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 items-start stagger-group">
+            <article data-exp-category="breakfast" class="experience-card rounded-sm overflow-hidden">
+              <button
+                type="button"
+                onclick="openLightbox(5)"
+                class="relative bg-espresso-dark text-left group block w-full"
+                aria-label="Enlarge Morning Tea, Waffles & Tropical Fruit breakfast photograph"
+              >
+                <img
+                  src="Breakfast.jpg"
+                  alt="Two guests enjoying milk tea, toasted sandwiches, waffles, boiled eggs, and fresh papaya and watermelon"
+                  loading="lazy"
+                  class="experience-photo"
+                />
+                <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-sm bg-espresso-dark/90 border border-brass-pale/40 text-[10px] font-bold uppercase tracking-[0.16em] text-brass-pale">
+                  <i class="fa-solid fa-sun mr-1"></i>Morning Breakfast
+                </span>
+              </button>
+              <div class="p-6 space-y-4">
+                <div class="space-y-2.5">
+                  <h3 class="font-serif text-2xl font-semibold text-espresso-dark">
+                    Ceylon Milk Tea, Waffles &amp; Fresh Highland Fruit
+                  </h3>
+                  <p class="text-xs sm:text-sm text-espresso-soft italic leading-relaxed">
+                    “Starting our Nuwara Eliya morning with steaming cups of Ceylon milk tea, golden waffles, toasted sandwiches, and sweet papaya right beneath the Rustique mirror.”
+                  </p>
+                </div>
+                <div class="pt-3 border-t border-brass-dark/15 flex items-center justify-between text-[11px] text-brass-dark font-bold uppercase tracking-[0.14em]">
+                  <span>7:30 – 10:30 AM Seating</span>
+                  <button type="button" onclick="openLightbox(5)" class="hover:text-espresso-dark transition">Enlarge →</button>
+                </div>
+              </div>
+            </article>
+
+            <article data-exp-category="breakfast" class="experience-card rounded-sm overflow-hidden">
+              <button
+                type="button"
+                onclick="openLightbox(8)"
+                class="relative bg-espresso-dark text-left group block w-full"
+                aria-label="Enlarge Warm Sri Lankan Rotis & Highland Morning breakfast photograph"
+              >
+                <img
+                  src="Breakfast4.jpg"
+                  alt="Smiling couple enjoying homemade Sri Lankan pol roti, dhal curry, and watermelon for breakfast"
+                  loading="lazy"
+                  class="experience-photo"
+                />
+                <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-sm bg-espresso-dark/90 border border-brass-pale/40 text-[10px] font-bold uppercase tracking-[0.16em] text-brass-pale">
+                  <i class="fa-solid fa-sun mr-1"></i>Morning Breakfast
+                </span>
+              </button>
+              <div class="p-6 space-y-4">
+                <div class="space-y-2.5">
+                  <h3 class="font-serif text-2xl font-semibold text-espresso-dark">
+                    Freshly Griddled Rotis &amp; Homemade Curries
+                  </h3>
+                  <p class="text-xs sm:text-sm text-espresso-soft italic leading-relaxed">
+                    “Hands-down our favourite breakfast in Sri Lanka—warm homemade rotis straight off the griddle with rich curries and sweet watermelon.”
+                  </p>
+                </div>
+                <div class="pt-3 border-t border-brass-dark/15 flex items-center justify-between text-[11px] text-brass-dark font-bold uppercase tracking-[0.14em]">
+                  <span>Mom’s Morning Kitchen</span>
+                  <button type="button" onclick="openLightbox(8)" class="hover:text-espresso-dark transition">Enlarge →</button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Column 3: Dinner Card + Exodus Dining Note Filling the Space Below It -->
+            <div class="space-y-7">
+              <article data-exp-category="dinner" class="experience-card rounded-sm overflow-hidden">
+                <button
+                  type="button"
+                  onclick="openLightbox(10)"
+                  class="relative bg-espresso-dark text-left group block w-full"
+                  aria-label="Enlarge Highland Hikers' Evening Feast dinner photograph"
+                >
+                  <img
+                    src="Dinner.jpeg"
+                    alt="Couple smiling over steaming yellow rice and homemade Sri Lankan vegetable curries after a highland walk"
+                    loading="lazy"
+                    class="experience-photo"
+                  />
+                  <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-sm bg-espresso-dark/90 border border-brass-pale/40 text-[10px] font-bold uppercase tracking-[0.16em] text-brass-pale">
+                    <i class="fa-solid fa-moon mr-1"></i>Boutique Dinner
+                  </span>
+                </button>
+                <div class="p-6 space-y-4">
+                  <div class="space-y-2.5">
+                    <h3 class="font-serif text-2xl font-semibold text-espresso-dark">
+                      Post-Trail Comfort Over Fragrant Yellow Rice
+                    </h3>
+                    <p class="text-xs sm:text-sm text-espresso-soft italic leading-relaxed">
+                      “Coming in from the cool mountain chill to a cosy teak table loaded with fragrant yellow rice and four bowls of mom’s homemade curries felt like coming home.”
+                    </p>
+                  </div>
+                  <div class="pt-3 border-t border-brass-dark/15 flex items-center justify-between text-[11px] text-brass-dark font-bold uppercase tracking-[0.14em]">
+                    <span>6:30 – 10:00 PM Seating</span>
+                    <button type="button" onclick="openLightbox(10)" class="hover:text-espresso-dark transition">Enlarge →</button>
+                  </div>
+                </div>
+              </article>
+
+              <div class="editorial-card rounded-sm p-6 bg-linen-warm border border-brass-dark/25 text-center space-y-2.5">
+                <span class="text-[10px] font-bold uppercase tracking-[0.22em] text-brass-dark block">
+                  Exodus Dining • Nuwara Eliya
+                </span>
+                <p class="font-serif italic text-xl text-espresso-dark leading-snug">
+                  “Every exodus into the highlands leads home to a table set with warmth, patience, and mom’s own hand.”
+                </p>
+                <span class="block text-[10px] uppercase tracking-[0.18em] text-espresso-soft font-semibold">
+                  Four Tables • Flavours Worth the Journey
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Centered Food Quote in the Middle -->
+          <div class="my-10 editorial-card rounded-sm p-8 sm:p-11 bg-paper text-center">
+            <span class="text-[10.5px] font-bold uppercase tracking-[0.22em] text-brass-dark block mb-3">
+              From Mom’s Table in the Highlands
+            </span>
+            <blockquote class="font-serif italic text-2xl sm:text-4xl text-espresso-dark max-w-3xl mx-auto leading-snug">
+              “Good food in the mist is more than a meal—it is warm spices, unhurried company, and the comfort of a home that remembers you.”
+            </blockquote>
+            <p class="text-xs uppercase tracking-[0.18em] text-brass-dark font-bold mt-4">
+              — The Rustique Restaurant • Exodus Dining
+            </p>
+          </div>
+
+          <!-- Lower 3-Column Grid + Exodus Dining Note Filling Column 1's Lower Space -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 items-start stagger-group">
+            <!-- Column 1: Breakfast5 Card + Exodus Dining Note Filling the Space Below It -->
+            <div class="space-y-7">
+              <article data-exp-category="breakfast" class="experience-card rounded-sm overflow-hidden">
+                <button
+                  type="button"
+                  onclick="openLightbox(9)"
+                  class="relative bg-espresso-dark text-left group block w-full"
+                  aria-label="Enlarge Crochet Linen & Morning Spread breakfast photograph"
+                >
+                  <img
+                    src="Breakfast5.jpeg"
+                    alt="Couple seated at a crochet-edged linen table with toast, chapati, dhal curry, and caramelized onion sambol"
+                    loading="lazy"
+                    class="experience-photo"
+                  />
+                  <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-sm bg-espresso-dark/90 border border-brass-pale/40 text-[10px] font-bold uppercase tracking-[0.16em] text-brass-pale">
+                    <i class="fa-solid fa-sun mr-1"></i>Morning Breakfast
+                  </span>
+                </button>
+                <div class="p-6 space-y-4">
+                  <div class="space-y-2.5">
+                    <h3 class="font-serif text-2xl font-semibold text-espresso-dark">
+                      Seeni Sambol, Dhal &amp; Warm Toast Under Soft Amber Light
+                    </h3>
+                    <p class="text-xs sm:text-sm text-espresso-soft italic leading-relaxed">
+                      “Every detail—from the crochet lace tablecloth and lotus napkin holder to the caramelized onion sambol and warm chapatis—made breakfast unforgettable.”
+                    </p>
+                  </div>
+                  <div class="pt-3 border-t border-brass-dark/15 flex items-center justify-between text-[11px] text-brass-dark font-bold uppercase tracking-[0.14em]">
+                    <span>Main Timber Room</span>
+                    <button type="button" onclick="openLightbox(9)" class="hover:text-espresso-dark transition">Enlarge →</button>
+                  </div>
+                </div>
+              </article>
+
+              <div class="editorial-card rounded-sm p-6 bg-linen-warm border border-brass-dark/25 text-center space-y-2.5">
+                <span class="text-[10px] font-bold uppercase tracking-[0.22em] text-brass-dark block">
+                  The Spirit of Exodus Dining
+                </span>
+                <p class="font-serif italic text-xl text-espresso-dark leading-snug">
+                  “Where mountain mist meets slow-simmered spice, strangers linger like old friends around one shared warmth.”
+                </p>
+                <span class="block text-[10px] uppercase tracking-[0.18em] text-espresso-soft font-semibold">
+                  Cooked Fresh • Shared Personally
+                </span>
+              </div>
+            </div>
+
+            <article data-exp-category="breakfast" class="experience-card rounded-sm overflow-hidden">
+              <button
+                type="button"
+                onclick="openLightbox(7)"
+                class="relative bg-espresso-dark text-left group block w-full"
+                aria-label="Enlarge Garden French Doors & Morning Mist breakfast photograph"
+              >
+                <img
+                  src="Breakfast3.jpg"
+                  alt="Couple seated beside open white French doors overlooking misty Nuwara Eliya greenery during breakfast"
+                  loading="lazy"
+                  class="experience-photo"
+                />
+                <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-sm bg-espresso-dark/90 border border-brass-pale/40 text-[10px] font-bold uppercase tracking-[0.16em] text-brass-pale">
+                  <i class="fa-solid fa-sun mr-1"></i>Morning Breakfast
+                </span>
+              </button>
+              <div class="p-6 space-y-4">
+                <div class="space-y-2.5">
+                  <h3 class="font-serif text-2xl font-semibold text-espresso-dark">
+                    Morning Mist Through the Colonial French Doors
+                  </h3>
+                  <p class="text-xs sm:text-sm text-espresso-soft italic leading-relaxed">
+                    “Sitting beside the open French doors watching the highland mist lift over the garden while sharing homemade rotis and fresh bananas.”
+                  </p>
+                </div>
+                <div class="pt-3 border-t border-brass-dark/15 flex items-center justify-between text-[11px] text-brass-dark font-bold uppercase tracking-[0.14em]">
+                  <span>Garden Door Table</span>
+                  <button type="button" onclick="openLightbox(7)" class="hover:text-espresso-dark transition">Enlarge →</button>
+                </div>
+              </div>
+            </article>
+
+            <article data-exp-category="breakfast" class="experience-card rounded-sm overflow-hidden">
+              <button
+                type="button"
+                onclick="openLightbox(6)"
+                class="relative bg-espresso-dark text-left group block w-full"
+                aria-label="Enlarge Steaming Ceylon Tea & Solo Morning Calm breakfast photograph"
+              >
+                <img
+                  src="Breakfast2.jpg"
+                  alt="Three-frame photo collage of a guest smiling with a steaming mug of Ceylon tea and homemade breakfast"
+                  loading="lazy"
+                  class="experience-photo"
+                />
+                <span class="absolute top-3.5 left-3.5 px-3 py-1 rounded-sm bg-espresso-dark/90 border border-brass-pale/40 text-[10px] font-bold uppercase tracking-[0.16em] text-brass-pale">
+                  <i class="fa-solid fa-sun mr-1"></i>Morning Breakfast
+                </span>
+              </button>
+              <div class="p-6 space-y-4">
+                <div class="space-y-2.5">
+                  <h3 class="font-serif text-2xl font-semibold text-espresso-dark">
+                    Unhurried Morning Rituals &amp; Steaming Ceylon Tea
+                  </h3>
+                  <p class="text-xs sm:text-sm text-espresso-soft italic leading-relaxed">
+                    “Such a peaceful, heartfelt corner in Nuwara Eliya—piping-hot tea from the teapot, fresh rotis, and genuine warmth at every turn.”
+                  </p>
+                </div>
+                <div class="pt-3 border-t border-brass-dark/15 flex items-center justify-between text-[11px] text-brass-dark font-bold uppercase tracking-[0.14em]">
+                  <span>Solo &amp; Couple Seating</span>
+                  <button type="button" onclick="openLightbox(6)" class="hover:text-espresso-dark transition">Enlarge →</button>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="mt-12 editorial-card rounded-sm p-6 sm:p-8 bg-paper flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <span class="text-[10.5px] font-bold uppercase tracking-[0.2em] text-brass-dark block">Create Your Own Memory</span>
+              <p class="font-serif text-2xl font-semibold text-espresso-dark mt-0.5">
+                Reserve one of our four tables for your upcoming Nuwara Eliya stay
+              </p>
+            </div>
+            <button
+              type="button"
+              onclick="openBookingModal()"
+              class="btn-brass rounded-sm px-7 py-3.5 text-xs flex items-center gap-2 shrink-0"
+            >
+              <i class="fa-brands fa-whatsapp text-base"></i>
+              <span>Enquire Your Table</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           EXODUS IN MOTION — CINEMATIC BRAND FILM
+           ========================================================= -->
+      <section id="film" class="py-24 bg-espresso-dark text-linen-light border-b border-brass-pale/20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 reveal-block">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end mb-10">
+            <div class="lg:col-span-7">
+              <span class="inline-flex items-center gap-3 text-[10.5px] font-bold uppercase tracking-[0.26em] text-brass-pale">
+                <span class="w-8 h-px bg-brass-pale"></span>A Glimpse Inside
+              </span>
+              <h2 class="font-serif text-4xl sm:text-6xl font-semibold text-linen-light mt-3 leading-none">
+                The Rustique, <span class="italic font-normal text-brass-pale">in motion.</span>
+              </h2>
+            </div>
+            <p class="lg:col-span-5 text-sm text-linen-light/75 leading-relaxed">
+              Experience the flickering lantern glow, mountain poetry, and intimate spirit of Exodus Dining before you step across our threshold.
+            </p>
+          </div>
+
+          <div class="p-2.5 bg-[#120A07] border border-brass-pale/35 shadow-2xl rounded-sm transition duration-500 hover:border-brass-pale/65">
+            <video
+              controls
+              playsinline
+              preload="metadata"
+              poster="IMG_8895_beb93e.jpg"
+              aria-label="The Rustique Restaurant — Exodus Dining brand film"
+              class="w-full aspect-video max-h-[640px] object-cover bg-black"
+            >
+              <source src="GKWKE3340.mp4" type="video/mp4" />
+              <source src="GKWKE3340.MOV" type="video/quicktime" />
+              Your browser cannot play this film. Please view it on a compatible device.
+            </video>
+          </div>
+          <p class="mt-4 text-center text-[11px] uppercase tracking-[0.2em] text-brass-pale/70">
+            Exodus Dining • Flavours Worth the Journey • Nuwara Eliya
+          </p>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           INTERIOR GALLERY WITH LIGHTBOX
+           ========================================================= -->
+      <section id="gallery" class="py-24 bg-linen-warm border-b border-brass-dark/15">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 reveal-block">
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+            <div>
+              <span class="editorial-kicker">Interior Gallery</span>
+              <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-espresso-dark mt-2">
+                Step Inside The Rustique
+              </h2>
+            </div>
+            <p class="text-sm text-espresso-soft max-w-md">
+              Click any photograph to inspect the timber craftsmanship, woven lighting, and intimate dining corners in full screen.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 stagger-group">
+            <button type="button" onclick="openLightbox(0)" class="gallery-card group relative rounded-sm text-left">
+              <img
+                src="IMG_8896_beb93e.jpg"
+                alt="Mirrored shelves and woven pendant light"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/600x700/2B1B13/FCF8F0?text=Woven+Pendant';"
+                class="gallery-image hd-photo w-full h-80 object-cover"
+              />
+              <div class="gallery-caption-wrap absolute inset-0 bg-gradient-to-t from-espresso-dark/90 via-espresso-dark/20 to-transparent flex flex-col justify-end p-6">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brass-pale">Interior Corner</span>
+                <span class="font-serif text-xl font-semibold text-linen-light mt-0.5">Mirrored Shelves &amp; Woven Pendant</span>
+              </div>
+            </button>
+
+            <button type="button" onclick="openLightbox(1)" class="gallery-card group relative rounded-sm text-left">
+              <img
+                src="IMG_8895_beb93e.jpg"
+                alt="Warm slatted timber partition and dining room"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/600x700/2B1B13/FCF8F0?text=Main+Dining+Room';"
+                class="gallery-image hd-photo w-full h-80 object-cover"
+              />
+              <div class="gallery-caption-wrap absolute inset-0 bg-gradient-to-t from-espresso-dark/90 via-espresso-dark/20 to-transparent flex flex-col justify-end p-6">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brass-pale">Grand Perspective</span>
+                <span class="font-serif text-xl font-semibold text-linen-light mt-0.5">Warm Timber &amp; Brick Sanctuary</span>
+              </div>
+            </button>
+
+            <button type="button" onclick="openLightbox(2)" class="gallery-card group relative rounded-sm text-left">
+              <img
+                src="IMG_3964.jpeg"
+                alt="Slatted wooden partition and crochet lace tablecloth"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/600x700/2B1B13/FCF8F0?text=Crochet+Linen';"
+                class="gallery-image hd-photo w-full h-80 object-cover"
+              />
+              <div class="gallery-caption-wrap absolute inset-0 bg-gradient-to-t from-espresso-dark/90 via-espresso-dark/20 to-transparent flex flex-col justify-end p-6">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brass-pale">Craftsmanship</span>
+                <span class="font-serif text-xl font-semibold text-linen-light mt-0.5">Slatted Timber &amp; Lace Linens</span>
+              </div>
+            </button>
+
+            <button type="button" onclick="openLightbox(3)" class="gallery-card group relative rounded-sm text-left">
+              <img
+                src="IMG_8893_beb93e.jpg"
+                alt="Intimate glass-topped teak tables in the inner room"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/600x700/2B1B13/FCF8F0?text=Inner+Room';"
+                class="gallery-image hd-photo w-full h-80 object-cover"
+              />
+              <div class="gallery-caption-wrap absolute inset-0 bg-gradient-to-t from-espresso-dark/90 via-espresso-dark/20 to-transparent flex flex-col justify-end p-6">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brass-pale">Inner Alcove</span>
+                <span class="font-serif text-xl font-semibold text-linen-light mt-0.5">Teak Tables &amp; Colonial French Doors</span>
+              </div>
+            </button>
+
+            <button type="button" onclick="openLightbox(4)" class="gallery-card group relative rounded-sm text-left sm:col-span-2 lg:col-span-2">
+              <img
+                src="IMG_8894_beb93e.jpg"
+                alt="Warm evening ambience across the inner dining sanctuary"
+                loading="lazy"
+                onerror="this.onerror=null;this.src='https://placehold.co/1200x700/2B1B13/FCF8F0?text=Evening+Ambience';"
+                class="gallery-image hd-photo w-full h-80 object-cover"
+              />
+              <div class="gallery-caption-wrap absolute inset-0 bg-gradient-to-t from-espresso-dark/90 via-espresso-dark/20 to-transparent flex flex-col justify-end p-6">
+                <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-brass-pale">Evening Sanctuary</span>
+                <span class="font-serif text-xl font-semibold text-linen-light mt-0.5">Warm Glow &amp; Intimate Four-Table Layout</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           AMBIENT HIGHLAND SOUNDSCAPE
+           ========================================================= -->
+      <section id="soundscape" class="py-20 bg-linen-light border-b border-brass-dark/15">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center reveal-block">
+          <span class="editorial-kicker">Listen to the Highlands</span>
+          <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-espresso-dark mt-2">
+            A Moment of Calm
+          </h2>
+          <p class="text-sm text-espresso-soft mt-3 mb-8 max-w-xl mx-auto">
+            Immerse yourself in the gentle rain and mountain breeze of Nuwara Eliya while you browse. Audio stays silent until you choose to play.
+          </p>
+
+          <div id="soundCard" class="editorial-card rounded-sm p-6 sm:p-10">
+            <div class="flex items-center justify-center gap-3 mb-3">
+              <span id="soundIcon" class="text-4xl" aria-hidden="true">🌧️</span>
+              <span class="eq-bars" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </span>
+            </div>
+            <p id="soundStatus" class="font-serif text-2xl text-espresso-dark mb-6" aria-live="polite">
+              Choose your highland atmosphere
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+              <button
+                type="button"
+                class="sound-button rounded-sm border border-brass-dark/25 p-4 text-espresso-dark hover:bg-linen-warm"
+                data-sound="rain"
+                aria-pressed="false"
+                onclick="playHighlandSound('rain')"
+              >
+                <span class="block text-2xl mb-1.5">🌧️</span>
+                <span class="text-xs font-bold uppercase tracking-[0.16em]">Gentle Rain</span>
+              </button>
+              <button
+                type="button"
+                class="sound-button rounded-sm border border-brass-dark/25 p-4 text-espresso-dark hover:bg-linen-warm"
+                data-sound="wind"
+                aria-pressed="false"
+                onclick="playHighlandSound('wind')"
+              >
+                <span class="block text-2xl mb-1.5">🍃</span>
+                <span class="text-xs font-bold uppercase tracking-[0.16em]">Mountain Wind</span>
+              </button>
+              <button
+                type="button"
+                class="sound-button rounded-sm border border-brass-dark/25 p-4 text-espresso-dark hover:bg-linen-warm"
+                data-sound="both"
+                aria-pressed="false"
+                onclick="playHighlandSound('both')"
+              >
+                <span class="block text-2xl mb-1.5">🌫️</span>
+                <span class="text-xs font-bold uppercase tracking-[0.16em]">Rain &amp; Mist</span>
+              </button>
+            </div>
+
+            <div class="mt-7 flex flex-col sm:flex-row gap-5 items-center justify-center">
+              <button
+                type="button"
+                onclick="stopHighlandSound()"
+                class="px-6 py-3 rounded-sm bg-espresso-dark text-linen-light hover:bg-espresso text-xs font-bold uppercase tracking-[0.16em] transition"
+              >
+                <i class="fa-solid fa-pause mr-2"></i>Pause Sound
+              </button>
+              <label for="soundVolume" class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.12em] text-espresso-soft">
+                Volume
+                <input
+                  id="soundVolume"
+                  type="range"
+                  min="0"
+                  max="100"
+                  value="25"
+                  class="accent-amber-700 w-32"
+                  oninput="changeSoundVolume(this.value)"
+                />
+                <span id="volumeValue" class="w-9 text-right text-espresso-dark">25%</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================================
+           LOCATION, EMAIL & DIRECT WHATSAPP ENQUIRY
+           ========================================================= -->
+      <section id="location" class="py-24 bg-linen-warm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 reveal-block">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-6 space-y-6">
+              <span class="editorial-kicker">Find &amp; Connect</span>
+              <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-espresso-dark leading-tight">
+                Visit Our Sanctuary in the Hills
+              </h2>
+              <p class="text-base text-espresso-soft leading-relaxed">
+                Located in Nuwara Eliya, The Rustique Restaurant welcomes guests across just four intimate tables. Because seating is limited and every dish is home-cooked to order, please check availability with us on WhatsApp or by email before visiting.
+              </p>
+
+              <div class="space-y-5 pt-2 stagger-group">
+                <div class="flex items-start gap-4">
+                  <div class="w-11 h-11 rounded-full bg-paper border border-brass-dark/25 flex items-center justify-center text-brass-dark shrink-0 transition hover:bg-espresso-dark hover:text-brass-pale">
+                    <i class="fa-solid fa-location-dot"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-serif text-xl font-bold text-espresso-dark">Location</h3>
+                    <p class="text-sm text-espresso-soft mt-0.5">Nuwara Eliya, Sri Lanka • Exodus Dining</p>
+                    <a
+                      href="https://www.google.com/maps/search/?api=1&query=The+Rustique+Restaurant+Nuwara+Eliya"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="inline-block mt-1 text-xs font-bold uppercase tracking-[0.14em] text-brass-dark underline underline-offset-4 hover:text-espresso-dark transition"
+                    >
+                      Open in Google Maps →
+                    </a>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <div class="w-11 h-11 rounded-full bg-paper border border-brass-dark/25 flex items-center justify-center text-brass-dark shrink-0 transition hover:bg-espresso-dark hover:text-brass-pale">
+                    <i class="fa-regular fa-clock"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-serif text-xl font-bold text-espresso-dark">Service Hours</h3>
+                    <p class="text-sm text-espresso-soft mt-0.5">
+                      Breakfast: 7:30 AM – 10:30 AM<br />
+                      Lunch: 12:00 PM – 3:00 PM<br />
+                      Dinner: 6:30 PM – 10:00 PM
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <div class="w-11 h-11 rounded-full bg-paper border border-brass-dark/25 flex items-center justify-center text-brass-dark shrink-0 transition hover:bg-espresso-dark hover:text-brass-pale">
+                    <i class="fa-brands fa-whatsapp"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-serif text-xl font-bold text-espresso-dark">WhatsApp Availability Desk</h3>
+                    <a
+                      href="https://wa.me/94702986611"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-sm font-semibold text-brass-dark hover:text-espresso-dark mt-0.5 inline-block transition"
+                    >
+                      +94 70 298 6611
+                    </a>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                  <div class="w-11 h-11 rounded-full bg-paper border border-brass-dark/25 flex items-center justify-center text-brass-dark shrink-0 transition hover:bg-espresso-dark hover:text-brass-pale">
+                    <i class="fa-regular fa-envelope"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-serif text-xl font-bold text-espresso-dark">Reservations &amp; Concierge Email</h3>
+                    <div class="flex flex-wrap items-center gap-2.5 mt-0.5">
+                      <a
+                        href="mailto:reservations@therustiquerestaurant.com?subject=Table%20Availability%20%26%20Menu%20Enquiry%20%E2%80%94%20The%20Rustique"
+                        class="text-sm font-semibold text-brass-dark hover:text-espresso-dark break-all transition"
+                      >
+                        reservations@therustiquerestaurant.com
+                      </a>
+                      <button
+                        type="button"
+                        onclick="copyEmailAddress()"
+                        class="px-2.5 py-1 rounded-sm border border-brass-dark/30 bg-linen-light hover:bg-linen-warm text-[10px] font-bold uppercase tracking-[0.12em] text-espresso-dark transition"
+                        title="Copy email address"
+                      >
+                        <i class="fa-regular fa-copy mr-1"></i><span id="copyEmailLabel">Copy</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pt-3 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onclick="openBookingModal()"
+                  class="btn-brass rounded-sm px-8 py-4 text-xs inline-flex items-center gap-2.5"
+                >
+                  <i class="fa-brands fa-whatsapp text-lg"></i>
+                  <span>Send Table Enquiry</span>
+                </button>
+                <a
+                  href="mailto:reservations@therustiquerestaurant.com?subject=Table%20Availability%20%26%20Menu%20Enquiry"
+                  class="rounded-sm px-6 py-4 border border-brass-dark/40 bg-paper text-espresso-dark hover:bg-linen-light font-bold text-xs uppercase tracking-[0.14em] inline-flex items-center gap-2 transition"
+                >
+                  <i class="fa-regular fa-envelope text-brass-dark text-sm"></i>
+                  <span>Email Reservations</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="lg:col-span-6">
+              <div class="editorial-card rounded-sm p-8 sm:p-10 bg-paper space-y-6">
+                <div class="flex items-center justify-between border-b border-brass-dark/15 pb-5">
+                  <div>
+                    <span class="text-[10.5px] font-bold uppercase tracking-[0.2em] text-brass-dark">Boutique Capacity</span>
+                    <h3 class="font-serif text-3xl font-semibold text-espresso-dark mt-1">
+                      Four Tables, Personal Care
+                    </h3>
+                  </div>
+                  <span class="px-3 py-1.5 rounded-sm bg-linen-warm border border-brass/40 text-[10px] font-bold uppercase tracking-[0.14em] text-brass-dark">
+                    4 Tables Total
+                  </span>
+                </div>
+
+                <p class="text-sm text-espresso-soft leading-relaxed">
+                  To preserve calm conversation, warm ambience, and unhurried home-cooked hospitality, our dining room welcomes up to four tables per seating.
+                </p>
+
+                <div class="p-5 rounded-sm bg-linen-warm/85 border border-brass-dark/20 space-y-2.5">
+                  <div class="flex items-center gap-2.5 text-espresso-dark font-semibold text-xs uppercase tracking-[0.14em]">
+                    <i class="fa-brands fa-whatsapp text-brass-dark text-base"></i>
+                    <span>Personal WhatsApp &amp; Email Confirmation</span>
+                  </div>
+                  <p class="text-xs sm:text-sm text-espresso-soft leading-relaxed">
+                    Simply send us an availability enquiry on WhatsApp or write to <strong class="text-espresso-dark">reservations@therustiquerestaurant.com</strong>. Our team will check your requested date and time, share what’s cooking fresh in mom’s kitchen, and reply personally.
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onclick="openBookingModal()"
+                  class="w-full btn-brass rounded-sm py-3.5 text-xs flex items-center justify-center gap-2"
+                >
+                  <i class="fa-brands fa-whatsapp text-base"></i>
+                  <span>Check Availability &amp; Menu</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-espresso-dark text-linen-light border-t border-brass-pale/25 py-14 pb-24 md:pb-14">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 text-center space-y-6">
+        <a href="#home" class="inline-flex flex-col items-center justify-center">
+          <span class="font-serif text-2xl font-semibold tracking-[0.14em] text-linen-light uppercase hover:text-brass-pale transition">
+            The Rustique Restaurant • Exodus Dining
+          </span>
+          <span class="text-[10px] tracking-[0.2em] text-brass-pale uppercase font-semibold mt-1">
+            Nuwara Eliya, Sri Lanka
+          </span>
+        </a>
+        <p class="text-xs text-linen-light/65 max-w-lg mx-auto leading-relaxed">
+          An intimate four-table boutique restaurant in Nuwara Eliya, Sri Lanka, serving authentic mom’s home-cooked breakfasts, lunches, and dinners.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-brass-pale">
+          <a href="https://wa.me/94702986611" target="_blank" rel="noopener noreferrer" class="hover:text-linen-light transition">
+            <i class="fa-brands fa-whatsapp mr-1.5"></i>+94 70 298 6611
+          </a>
+          <span class="hidden sm:inline text-brass-pale/35">•</span>
+          <a href="mailto:reservations@therustiquerestaurant.com" class="hover:text-linen-light transition">
+            <i class="fa-regular fa-envelope mr-1.5"></i>reservations@therustiquerestaurant.com
+          </a>
+          <span class="hidden sm:inline text-brass-pale/35">•</span>
+          <span><i class="fa-solid fa-location-dot mr-1.5"></i>Nuwara Eliya, Sri Lanka</span>
+        </div>
+
+        <nav class="flex justify-center flex-wrap gap-6 text-[11px] uppercase tracking-[0.16em] text-linen-light/75" aria-label="Footer navigation">
+          <a href="#about" class="hover:text-brass-pale transition">Sanctuary</a>
+          <a href="#climate" class="hover:text-brass-pale transition">Weather</a>
+          <a href="#timings" class="hover:text-brass-pale transition">Hours</a>
+          <a href="#menus" class="hover:text-brass-pale transition">Mom’s Kitchen</a>
+          <a href="#experiences" class="hover:text-brass-pale transition">Experiences</a>
+          <a href="#film" class="hover:text-brass-pale transition">Film</a>
+          <a href="#gallery" class="hover:text-brass-pale transition">Gallery</a>
+          <a href="#location" class="hover:text-brass-pale transition">Location</a>
+        </nav>
+        <div class="pt-6 border-t border-brass-pale/15 text-[11px] tracking-[0.12em] text-linen-light/55">
+          © <span id="copyrightYear">2026</span> The Rustique Restaurant — Exodus Dining. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- =========================================================
+       DEDICATED WHATSAPP & EMAIL TABLE ENQUIRY PAGE (#reserve)
+       ========================================================= -->
+  <section
+    id="reservation-page"
+    class="hidden min-h-screen bg-linen-light text-espresso page-fade-in"
+    aria-labelledby="reservationPageHeading"
+  >
+    <div class="sticky top-0 z-40 bg-espresso-dark/95 backdrop-blur-md border-b border-brass-pale/25 text-linen-light">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 h-20 flex items-center justify-between gap-4">
+        <button
+          type="button"
+          onclick="closeBookingModal()"
+          class="inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.16em] text-brass-pale hover:text-linen-light transition"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Return to Restaurant</span>
+        </button>
+
+        <a href="#home" onclick="closeBookingModal()" class="hidden sm:block font-serif text-xl font-semibold tracking-[0.14em] uppercase text-linen-light hover:text-brass-pale transition">
+          The Rustique Restaurant Concierge
+        </a>
+
+        <div class="flex items-center gap-4">
+          <a
+            href="mailto:reservations@therustiquerestaurant.com?subject=Table%20Availability%20%26%20Menu%20Enquiry"
+            class="hidden md:inline-flex text-xs font-bold uppercase tracking-[0.14em] text-linen-light/85 hover:text-brass-pale transition"
+          >
+            <i class="fa-regular fa-envelope text-brass-pale mr-1.5"></i>Email
+          </a>
+          <a
+            href="https://wa.me/94702986611?text=Hello%20The%20Rustique%2C%20I%20would%20like%20to%20check%20table%20availability%20and%20see%20today%27s%20menu."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-xs font-bold uppercase tracking-[0.14em] text-linen-light/85 hover:text-brass-pale transition"
+          >
+            <i class="fa-brands fa-whatsapp text-brass-pale mr-1.5"></i>Direct Chat
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-10 py-12 lg:py-16">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="editorial-kicker">Table Availability &amp; Menu Enquiry</span>
+        <h1 id="reservationPageHeading" class="font-serif text-4xl sm:text-6xl font-semibold text-espresso-dark mt-3 leading-[1.02]">
+          Enquire via <span class="italic font-normal text-brass-dark">WhatsApp or Email</span>
+        </h1>
+        <p class="text-sm sm:text-base text-espresso-soft mt-4 leading-relaxed">
+          Because our dining room has only <strong>four intimate tables</strong> and every dish is freshly cooked to order from mom’s kitchen, we confirm all seating availability and share today’s menu personally via WhatsApp on <strong class="text-espresso-dark">+94 70 298 6611</strong> or by email at <a href="mailto:reservations@therustiquerestaurant.com" class="font-semibold text-brass-dark underline underline-offset-4">reservations@therustiquerestaurant.com</a>.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+        <div class="lg:col-span-7">
+          <div class="editorial-card rounded-sm p-6 sm:p-10 bg-paper">
+            <div class="border-b border-brass-dark/15 pb-5 mb-6">
+              <span class="text-[10.5px] font-bold uppercase tracking-[0.2em] text-brass-dark">Step 1 • Your Visit Details</span>
+              <h2 class="font-serif text-3xl font-semibold text-espresso-dark mt-1">
+                Prepare Your Availability &amp; Menu Enquiry
+              </h2>
+            </div>
+
+            <form id="reservationForm" class="space-y-5">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="resName" class="block text-[11px] font-bold uppercase tracking-[0.14em] text-espresso-dark mb-1.5">
+                    Guest Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="resName"
+                    name="name"
+                    required
+                    autocomplete="name"
+                    maxlength="100"
+                    placeholder="Enter your full name"
+                    class="w-full px-4 py-3.5 rounded-sm bg-linen-light border border-brass-dark/35 text-espresso-dark text-sm focus:outline-none focus:border-brass transition"
+                  />
+                </div>
+                <div>
+                  <label for="resPhone" class="block text-[11px] font-bold uppercase tracking-[0.14em] text-espresso-dark mb-1.5">
+                    Your WhatsApp / Phone Number *
+                  </label>
+                  <input
+                    type="tel"
+                    id="resPhone"
+                    name="phone"
+                    required
+                    autocomplete="tel"
+                    maxlength="30"
+                    placeholder="+94 7X XXX XXXX"
+                    class="w-full px-4 py-3.5 rounded-sm bg-linen-light border border-brass-dark/35 text-espresso-dark text-sm focus:outline-none focus:border-brass transition"
+                  />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="resDate" class="block text-[11px] font-bold uppercase tracking-[0.14em] text-espresso-dark mb-1.5">
+                    Preferred Date *
+                  </label>
+                  <input
+                    type="date"
+                    id="resDate"
+                    name="date"
+                    required
+                    class="w-full px-4 py-3.5 rounded-sm bg-linen-light border border-brass-dark/35 text-espresso-dark text-sm focus:outline-none focus:border-brass transition"
+                  />
+                </div>
+                <div>
+                  <label for="resTime" class="block text-[11px] font-bold uppercase tracking-[0.14em] text-espresso-dark mb-1.5">
+                    Meal Service &amp; Seating Time *
+                  </label>
+                  <select
+                    id="resTime"
+                    name="time"
+                    required
+                    class="w-full px-4 py-3.5 rounded-sm bg-linen-light border border-brass-dark/35 text-espresso-dark text-sm focus:outline-none focus:border-brass transition"
+                  >
+                    <optgroup label="Morning Breakfast (7:30 AM – 10:30 AM)">
+                      <option value="Breakfast - 7:30 AM">Breakfast • 7:30 AM</option>
+                      <option value="Breakfast - 8:00 AM">Breakfast • 8:00 AM</option>
+                      <option value="Breakfast - 8:30 AM">Breakfast • 8:30 AM</option>
+                      <option value="Breakfast - 9:00 AM">Breakfast • 9:00 AM</option>
+                      <option value="Breakfast - 9:30 AM">Breakfast • 9:30 AM</option>
+                      <option value="Breakfast - 10:00 AM">Breakfast • 10:00 AM</option>
+                    </optgroup>
+                    <optgroup label="Highland Lunch (12:00 PM – 3:00 PM)">
+                      <option value="Lunch - 12:00 PM">Lunch • 12:00 PM</option>
+                      <option value="Lunch - 12:30 PM">Lunch • 12:30 PM</option>
+                      <option value="Lunch - 1:00 PM">Lunch • 1:00 PM</option>
+                      <option value="Lunch - 1:30 PM">Lunch • 1:30 PM</option>
+                      <option value="Lunch - 2:00 PM">Lunch • 2:00 PM</option>
+                      <option value="Lunch - 2:30 PM">Lunch • 2:30 PM</option>
+                    </optgroup>
+                    <optgroup label="Evening Dinner (6:30 PM – 10:00 PM)">
+                      <option value="Dinner - 6:30 PM" selected>Dinner • 6:30 PM</option>
+                      <option value="Dinner - 7:00 PM">Dinner • 7:00 PM</option>
+                      <option value="Dinner - 7:30 PM">Dinner • 7:30 PM</option>
+                      <option value="Dinner - 8:00 PM">Dinner • 8:00 PM</option>
+                      <option value="Dinner - 8:30 PM">Dinner • 8:30 PM</option>
+                      <option value="Dinner - 9:00 PM">Dinner • 9:00 PM</option>
+                    </optgroup>
+                  </select>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="resGuests" class="block text-[11px] font-bold uppercase tracking-[0.14em] text-espresso-dark mb-1.5">
+                    Number of Guests *
+                  </label>
+                  <select
+                    id="resGuests"
+                    name="guests"
+                    required
+                    class="w-full px-4 py-3.5 rounded-sm bg-linen-light border border-brass-dark/35 text-espresso-dark text-sm focus:outline-none focus:border-brass transition"
+                  >
+                    <option value="1 Guest">1 Guest</option>
+                    <option value="2 Guests" selected>2 Guests</option>
+                    <option value="3 Guests">3 Guests</option>
+                    <option value="4 Guests">4 Guests</option>
+                    <option value="5+ Guests (Subject to table availability)">5+ Guests (Subject to table availability)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label for="resMenu" class="block text-[11px] font-bold uppercase tracking-[0.14em] text-espresso-dark mb-1.5">
+                    Meal &amp; Culinary Preference *
+                  </label>
+                  <select
+                    id="resMenu"
+                    name="menu"
+                    required
+                    class="w-full px-4 py-3.5 rounded-sm bg-linen-light border border-brass-dark/35 text-espresso-dark text-sm focus:outline-none focus:border-brass transition"
+                  >
+                    <option value="Please share today's mom-cooked menu">Please share today’s mom-cooked menu</option>
+                    <option value="Mom's Sri Lankan Heritage Home Cooking">Mom’s Sri Lankan Heritage Home Cooking</option>
+                    <option value="Homemade Western Comfort Dining">Homemade Western Comfort Dining</option>
+                    <option value="Morning Breakfast Seating">Morning Breakfast Seating</option>
+                    <option value="Midday Lunch Seating">Midday Lunch Seating</option>
+                    <option value="Evening Dinner Seating">Evening Dinner Seating</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label for="resNotes" class="block text-[11px] font-bold uppercase tracking-[0.14em] text-espresso-dark mb-1.5">
+                  Dietary Notes, Spice Level &amp; Special Occasion
+                </label>
+                <textarea
+                  id="resNotes"
+                  name="notes"
+                  rows="3"
+                  maxlength="600"
+                  placeholder="Vegetarian, mild spice preference, food allergies, anniversary, or arrival notes… (optional)"
+                  class="w-full px-4 py-3.5 rounded-sm bg-linen-light border border-brass-dark/35 text-espresso-dark text-sm focus:outline-none focus:border-brass transition"
+                ></textarea>
+              </div>
+
+              <div class="p-4 rounded-sm bg-linen-warm/70 border border-brass-dark/20 text-xs text-espresso-soft leading-relaxed">
+                <strong class="text-espresso-dark">Why we confirm personally:</strong> Our dining room has only <strong>four intimate tables</strong> and every dish is cooked fresh from mom’s kitchen. Checking availability directly prevents double-bookings and lets us share today’s homemade menu with you personally.
+              </div>
+
+              <p id="bookingError" class="hidden text-xs font-semibold text-red-700 bg-red-50 border border-red-200 px-4 py-3 rounded-sm" role="alert"></p>
+
+              <div id="whatsappReadyBanner" class="hidden p-4 rounded-sm bg-emerald-950 text-linen-light border border-brass-pale/40 space-y-3" role="status" aria-live="polite">
+                <div class="flex items-start gap-3">
+                  <i class="fa-brands fa-whatsapp text-emerald-400 text-xl mt-0.5"></i>
+                  <div class="text-xs leading-relaxed">
+                    <strong class="text-brass-pale uppercase tracking-[0.12em] block mb-0.5">Your Enquiry is Ready</strong>
+                    If WhatsApp did not open automatically, tap below or send via email to <strong>reservations@therustiquerestaurant.com</strong>.
+                  </div>
+                </div>
+                <div class="flex flex-wrap gap-2.5">
+                  <a
+                    id="directWhatsappAnchor"
+                    href="https://wa.me/94702986611"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-brass rounded-sm px-5 py-2.5 text-[11px] inline-flex items-center gap-2"
+                  >
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Open WhatsApp Now</span>
+                  </a>
+                  <a
+                    id="directEmailAnchor"
+                    href="mailto:reservations@therustiquerestaurant.com"
+                    class="px-4 py-2.5 rounded-sm border border-brass-pale/50 text-linen-light hover:bg-brass-pale/15 text-[11px] font-bold uppercase tracking-[0.12em] inline-flex items-center gap-2 transition"
+                  >
+                    <i class="fa-regular fa-envelope"></i>
+                    <span>Send via Email</span>
+                  </a>
+                  <button
+                    type="button"
+                    onclick="copyWhatsappMessage()"
+                    class="px-4 py-2.5 rounded-sm border border-brass-pale/50 text-linen-light hover:bg-brass-pale/15 text-[11px] font-bold uppercase tracking-[0.12em] transition"
+                  >
+                    <i class="fa-regular fa-copy mr-1.5"></i>Copy Message
+                  </button>
+                </div>
+              </div>
+
+              <div class="pt-1 flex flex-col sm:flex-row gap-3">
+                <button
+                  type="submit"
+                  class="flex-1 btn-brass rounded-sm py-4 px-6 text-xs flex items-center justify-center gap-2.5"
+                >
+                  <i class="fa-brands fa-whatsapp text-lg"></i>
+                  <span>Send on WhatsApp</span>
+                </button>
+                <a
+                  id="formEmailButton"
+                  href="mailto:reservations@therustiquerestaurant.com"
+                  class="px-5 py-4 rounded-sm border border-brass-dark/40 bg-linen-light text-espresso-dark hover:bg-linen-warm text-xs font-bold uppercase tracking-[0.14em] flex items-center justify-center gap-2 transition"
+                >
+                  <i class="fa-regular fa-envelope text-brass-dark"></i>
+                  <span>Send via Email</span>
+                </a>
+                <button
+                  type="button"
+                  onclick="copyWhatsappMessage()"
+                  class="px-5 py-4 rounded-sm border border-brass-dark/35 text-espresso-dark hover:bg-linen-warm text-xs font-bold uppercase tracking-[0.14em] transition"
+                >
+                  <i class="fa-regular fa-copy mr-1.5"></i>Copy
+                </button>
+              </div>
+              <p id="copyFeedback" class="hidden text-xs text-emerald-800 font-semibold text-center" role="status" aria-live="polite">
+                Enquiry message copied to clipboard — paste into WhatsApp (+94 70 298 6611) or email reservations@therustiquerestaurant.com.
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 space-y-6">
+          <div class="rounded-sm bg-espresso-dark text-linen-light border border-brass-pale/35 p-6 sm:p-8 shadow-2xl space-y-5">
+            <div class="flex items-center justify-between border-b border-brass-pale/20 pb-4">
+              <div>
+                <span class="text-[10px] font-bold uppercase tracking-[0.22em] text-brass-pale block">Step 2 • Live Message Preview</span>
+                <h3 class="font-serif text-2xl font-semibold text-linen-light mt-0.5">Concierge Enquiry Card</h3>
+              </div>
+              <span class="w-10 h-10 rounded-full bg-emerald-500/15 border border-emerald-400/40 flex items-center justify-center text-emerald-400">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+              </span>
+            </div>
+
+            <pre
+              id="whatsappPreviewBox"
+              class="whitespace-pre-wrap font-sans text-xs leading-relaxed text-linen-light/90 bg-[#120A07] border border-brass-pale/20 rounded-sm p-4"
+            ></pre>
+
+            <div class="text-xs text-linen-light/75 space-y-2 pt-1">
+              <p><i class="fa-brands fa-whatsapp text-brass-pale mr-2"></i>Concierge WhatsApp: <strong class="text-linen-light">+94 70 298 6611</strong></p>
+              <p><i class="fa-regular fa-envelope text-brass-pale mr-2"></i>Reservations Email: <a href="mailto:reservations@therustiquerestaurant.com" class="text-brass-pale underline underline-offset-4 hover:text-linen-light">reservations@therustiquerestaurant.com</a></p>
+              <p><i class="fa-solid fa-chair text-brass-pale mr-2"></i>Capacity: <strong class="text-linen-light">4 Intimate Tables Only</strong></p>
+              <p><i class="fa-solid fa-utensils text-brass-pale mr-2"></i>Menu: <strong class="text-linen-light">Mom’s Home-Cooked Food • Shared Personally</strong></p>
+            </div>
+          </div>
+
+          <div class="editorial-card rounded-sm p-6 bg-paper space-y-3">
+            <h4 class="font-serif text-xl font-bold text-espresso-dark">What Happens Next?</h4>
+            <ol class="text-xs text-espresso-soft space-y-2 list-decimal list-inside leading-relaxed">
+              <li>Tap <strong>Send on WhatsApp</strong> or <strong>Send via Email</strong> to dispatch your visit details.</li>
+              <li>Our team in Nuwara Eliya checks availability across our four tables for your requested seating.</li>
+              <li>We reply personally with your table confirmation and today’s mom-cooked menu options.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Floating WhatsApp Bar -->
+  <div id="mobileStickyBar" class="md:hidden fixed bottom-3 left-3 right-3 z-35">
+    <button
+      type="button"
+      onclick="openBookingModal()"
+      class="w-full btn-brass rounded-sm py-3.5 px-4 text-[11px] flex items-center justify-center gap-2 shadow-2xl"
+    >
+      <i class="fa-brands fa-whatsapp text-base"></i>
+      <span>Enquire Table &amp; Menu</span>
+    </button>
+  </div>
+
+  <!-- Back to Top -->
+  <button id="backToTop" type="button" aria-label="Back to top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+    <i class="fa-solid fa-arrow-up text-xs"></i>
+  </button>
+
+  <!-- Full-Screen Gallery & Experience Lightbox -->
+  <div
+    id="lightboxModal"
+    class="fixed inset-0 z-[70] hidden bg-espresso-dark/95 backdrop-blur-md items-center justify-center p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Gallery image viewer"
+    onclick="closeLightbox()"
+  >
+    <div class="relative max-w-5xl w-full text-center" onclick="event.stopPropagation()">
+      <button
+        type="button"
+        onclick="closeLightbox()"
+        class="absolute -top-12 right-0 text-linen-light hover:text-brass-pale text-2xl p-2 transition"
+        aria-label="Close image viewer"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="relative flex items-center justify-center">
+        <button
+          type="button"
+          onclick="stepLightbox(-1)"
+          class="hidden sm:grid place-items-center w-11 h-11 rounded-full bg-espresso/90 border border-brass-pale/40 text-linen-light hover:text-brass-pale hover:border-brass-pale mr-4 shrink-0 transition"
+          aria-label="Previous photograph"
+        >
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
+        <img
+          id="lightboxImg"
+          src=""
+          alt="Enlarged restaurant photograph"
+          class="hd-photo max-h-[82vh] max-w-full mx-auto rounded-sm border border-brass-pale/40 shadow-2xl object-contain"
+        />
+
+        <button
+          type="button"
+          onclick="stepLightbox(1)"
+          class="hidden sm:grid place-items-center w-11 h-11 rounded-full bg-espresso/90 border border-brass-pale/40 text-linen-light hover:text-brass-pale hover:border-brass-pale ml-4 shrink-0 transition"
+          aria-label="Next photograph"
+        >
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="mt-4 flex items-center justify-center gap-4">
+        <button type="button" onclick="stepLightbox(-1)" class="sm:hidden text-xs uppercase tracking-widest text-brass-pale px-3 py-1 border border-brass-pale/30">Prev</button>
+        <p id="lightboxCaption" class="font-serif text-lg sm:text-xl text-brass-pale"></p>
+        <button type="button" onclick="stepLightbox(1)" class="sm:hidden text-xs uppercase tracking-widest text-brass-pale px-3 py-1 border border-brass-pale/30">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const WHATSAPP_NUMBER = '94702986611';
+    const RESERVATIONS_EMAIL = 'reservations@therustiquerestaurant.com';
+
+    // Ensure browser tab favicon loads with automatic fallback
+    (function ensureFavicon() {
+      const probe = new Image();
+      probe.onerror = () => {
+        const icon = document.getElementById('siteFavicon');
+        const apple = document.getElementById('siteAppleIcon');
+        if (icon) {
+          icon.type = 'image/jpeg';
+          icon.href = 'IMG_3964_beb93e.jpeg';
+        }
+        if (apple) {
+          apple.href = 'IMG_3964_beb93e.jpeg';
+        }
+      };
+      probe.src = 'image_ba9726.png';
+    })();
+
+    function filterExperiences(category) {
+      document.querySelectorAll('[data-exp-filter]').forEach(btn => {
+        btn.setAttribute('aria-pressed', String(btn.dataset.expFilter === category));
+      });
+      document.querySelectorAll('[data-exp-category]').forEach(card => {
+        const show = category === 'all' || card.dataset.expCategory === category;
+        card.classList.toggle('hidden', !show);
+      });
+    }
+
+    function copyEmailAddress() {
+      const label = document.getElementById('copyEmailLabel');
+      const setCopied = () => {
+        if (!label) return;
+        label.textContent = 'Copied';
+        setTimeout(() => { label.textContent = 'Copy'; }, 2500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(RESERVATIONS_EMAIL).then(setCopied).catch(() => {});
+      }
+    }
+
+    function toggleMobileMenu(forceClose = false) {
+      const menu = document.getElementById('mobileMenu');
+      const btn = document.getElementById('mobileMenuBtn');
+      const icon = document.getElementById('menuIcon');
+      const shouldClose = forceClose || !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden', shouldClose);
+      btn.setAttribute('aria-expanded', String(!shouldClose));
+      icon.className = shouldClose ? 'fa-solid fa-bars text-lg' : 'fa-solid fa-xmark text-lg';
+    }
+
+    function updateSanctuaryTelemetry() {
+      const clockEl = document.getElementById('slstClock');
+      const statusEl = document.getElementById('sanctuaryServiceBanner');
+      try {
+        const now = new Date();
+        const timeStr = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Asia/Colombo',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        }).format(now);
+        if (clockEl) clockEl.textContent = `${timeStr} SLST`;
+
+        const parts = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Asia/Colombo',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        }).formatToParts(now);
+        const map = Object.fromEntries(parts.map(p => [p.type, Number(p.value)]));
+        const mins = map.hour * 60 + map.minute;
+
+        if (!statusEl) return;
+        if (mins >= 450 && mins <= 630) {
+          statusEl.innerHTML = '<span class="text-brass-pale font-bold">Highland Breakfast Service Open</span> • Until 10:30 AM';
+        } else if (mins >= 720 && mins <= 900) {
+          statusEl.innerHTML = '<span class="text-brass-pale font-bold">Highland Lunch Service Open</span> • Until 3:00 PM';
+        } else if (mins >= 1110 && mins <= 1320) {
+          statusEl.innerHTML = '<span class="text-brass-pale font-bold">Evening Dinner Service Open</span> • Until 10:00 PM';
+        } else if (mins < 450) {
+          statusEl.textContent = 'Morning Breakfast opens at 7:30 AM • Enquire ahead via WhatsApp or email';
+        } else if (mins < 720) {
+          statusEl.textContent = 'Highland Lunch opens at 12:00 PM • Enquire ahead via WhatsApp or email';
+        } else if (mins < 1110) {
+          statusEl.textContent = 'Evening Dinner opens at 6:30 PM • Enquire ahead via WhatsApp or email';
+        } else {
+          statusEl.textContent = 'Kitchen resting for the night • Breakfast resumes at 7:30 AM';
+        }
+      } catch (_) {}
+    }
+    updateSanctuaryTelemetry();
+    setInterval(updateSanctuaryTelemetry, 30000);
+
+    const restaurantView = document.getElementById('restaurant-view');
+    const reservationPage = document.getElementById('reservation-page');
+    const reservationForm = document.getElementById('reservationForm');
+    let lastTriggerElement = null;
+
+    function openBookingModal(menuName = '', updateHash = true) {
+      lastTriggerElement = document.activeElement;
+      if (menuName) {
+        const menuSelect = document.getElementById('resMenu');
+        const matchingOption = Array.from(menuSelect.options).find(opt => opt.value === menuName);
+        if (matchingOption) menuSelect.value = menuName;
+
+        const timeSelect = document.getElementById('resTime');
+        if (menuName.includes('Breakfast')) {
+          timeSelect.value = 'Breakfast - 8:30 AM';
+        } else if (menuName.includes('Lunch')) {
+          timeSelect.value = 'Lunch - 1:00 PM';
+        } else if (menuName.includes('Dinner')) {
+          timeSelect.value = 'Dinner - 7:00 PM';
+        }
+      }
+      showReservationPage(updateHash);
+    }
+
+    function showReservationPage(updateHash = true) {
+      updateWhatsappPreview();
+      restaurantView.classList.add('hidden');
+      reservationPage.classList.remove('hidden');
+      const stickyBar = document.getElementById('mobileStickyBar');
+      if (stickyBar) stickyBar.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      if (updateHash && window.location.hash !== '#reserve') {
+        history.pushState({ view: 'reserve' }, '', '#reserve');
+      }
+      setTimeout(() => {
+        const nameInput = document.getElementById('resName');
+        if (nameInput) nameInput.focus();
+      }, 60);
+    }
+
+    function closeBookingModal(updateHash = true) {
+      reservationPage.classList.add('hidden');
+      restaurantView.classList.remove('hidden');
+      const stickyBar = document.getElementById('mobileStickyBar');
+      if (stickyBar) stickyBar.classList.remove('hidden');
+      if (updateHash && window.location.hash === '#reserve') {
+        history.pushState({ view: 'restaurant' }, '', window.location.pathname + window.location.search);
+      }
+      if (lastTriggerElement && typeof lastTriggerElement.focus === 'function') {
+        lastTriggerElement.focus();
+      }
+    }
+
+    window.addEventListener('popstate', () => {
+      if (window.location.hash === '#reserve') {
+        showReservationPage(false);
+      } else if (!reservationPage.classList.contains('hidden')) {
+        closeBookingModal(false);
+      }
+    });
+
+    if (window.location.hash === '#reserve') {
+      showReservationPage(false);
+    }
+
+    function getSriLankaDate() {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'Asia/Colombo',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+      }).formatToParts(new Date());
+      const map = Object.fromEntries(parts.map(p => [p.type, p.value]));
+      return `${map.year}-${map.month}-${map.day}`;
+    }
+    const resDateInput = document.getElementById('resDate');
+    resDateInput.min = getSriLankaDate();
+    resDateInput.value = getSriLankaDate();
+
+    document.getElementById('resTime').addEventListener('change', event => {
+      const time = event.target.value;
+      const menuSelect = document.getElementById('resMenu');
+      if (time.startsWith('Breakfast')) {
+        menuSelect.value = 'Morning Breakfast Seating';
+      } else if (time.startsWith('Lunch')) {
+        menuSelect.value = 'Midday Lunch Seating';
+      } else if (time.startsWith('Dinner')) {
+        menuSelect.value = 'Evening Dinner Seating';
+      }
+      updateWhatsappPreview();
+    });
+
+    function buildWhatsappMessage() {
+      const name = document.getElementById('resName').value.trim() || 'Guest';
+      const phone = document.getElementById('resPhone').value.trim() || 'Not provided';
+      const date = document.getElementById('resDate').value || getSriLankaDate();
+      const time = document.getElementById('resTime').value;
+      const guests = document.getElementById('resGuests').value;
+      const menu = document.getElementById('resMenu').value;
+      const notes = document.getElementById('resNotes').value.trim() || 'None';
+
+      return [
+        '\u2728 *THE RUSTIQUE RESTAURANT* \u2728',
+        '_Exodus Dining \u2022 Nuwara Eliya_',
+        '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501',
+        '\uD83C\uDF7D\uFE0F *Table Availability & Menu Enquiry*',
+        '',
+        'Warm greetings from the misty hills! I would love to enquire about a table for an upcoming visit:',
+        '',
+        `\uD83D\uDC64 *Guest Name:* ${name}`,
+        `\uD83D\uDCF1 *WhatsApp / Contact:* ${phone}`,
+        `\uD83D\uDCC5 *Preferred Date:* ${date}`,
+        `\uD83D\uDD70\uFE0F *Seating Time:* ${time}`,
+        `\uD83E\uDE91 *Party Size:* ${guests}`,
+        `\uD83C\uDF72 *Culinary Preference:* ${menu}`,
+        `\uD83D\uDCDD *Dietary / Special Notes:* ${notes}`,
+        '',
+        '\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501',
+        '\uD83C\uDFE1 Could you kindly confirm if one of your four intimate tables is available and share what is cooking fresh in mom\u2019s kitchen for this date? Warm thanks! \uD83C\uDF3F\u2615'
+      ].join('\n');
+    }
+
+    function buildEmailBody() {
+      const name = document.getElementById('resName').value.trim() || 'Guest';
+      const phone = document.getElementById('resPhone').value.trim() || 'Not provided';
+      const date = document.getElementById('resDate').value || getSriLankaDate();
+      const time = document.getElementById('resTime').value;
+      const guests = document.getElementById('resGuests').value;
+      const menu = document.getElementById('resMenu').value;
+      const notes = document.getElementById('resNotes').value.trim() || 'None';
+
+      return [
+        'Warm greetings to The Rustique Restaurant — Exodus Dining,',
+        '',
+        'I would love to check table availability and see today\'s home-cooked menu for an upcoming visit:',
+        '',
+        `Guest Name: ${name}`,
+        `Contact / WhatsApp: ${phone}`,
+        `Preferred Date: ${date}`,
+        `Seating Time: ${time}`,
+        `Party Size: ${guests}`,
+        `Culinary Preference: ${menu}`,
+        `Dietary / Special Notes: ${notes}`,
+        '',
+        'Kindly confirm if one of your four intimate tables is available and share what is cooking fresh from mom\'s kitchen for this date.',
+        '',
+        'Warm regards,',
+        name
+      ].join('\n');
+    }
+
+    function buildWhatsappUrl(message) {
+      return `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}&text=${encodeURIComponent(message)}`;
+    }
+
+    function buildMailtoUrl() {
+      const date = document.getElementById('resDate').value || getSriLankaDate();
+      const time = document.getElementById('resTime').value;
+      const subject = `Table Availability & Menu Enquiry — ${date} (${time})`;
+      return `mailto:${RESERVATIONS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(buildEmailBody())}`;
+    }
+
+    function updateWhatsappPreview() {
+      const msg = buildWhatsappMessage();
+      const previewBox = document.getElementById('whatsappPreviewBox');
+      if (previewBox) previewBox.textContent = msg;
+      const directAnchor = document.getElementById('directWhatsappAnchor');
+      if (directAnchor) directAnchor.href = buildWhatsappUrl(msg);
+      const mailtoUrl = buildMailtoUrl();
+      const directEmail = document.getElementById('directEmailAnchor');
+      if (directEmail) directEmail.href = mailtoUrl;
+      const formEmailBtn = document.getElementById('formEmailButton');
+      if (formEmailBtn) formEmailBtn.href = mailtoUrl;
+    }
+
+    ['resName', 'resPhone', 'resDate', 'resTime', 'resGuests', 'resMenu', 'resNotes'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        el.addEventListener('input', updateWhatsappPreview);
+        el.addEventListener('change', updateWhatsappPreview);
+      }
+    });
+    updateWhatsappPreview();
+
+    function copyWhatsappMessage() {
+      const text = buildWhatsappMessage();
+      const feedback = document.getElementById('copyFeedback');
+      const finishCopy = () => {
+        if (feedback) {
+          feedback.classList.remove('hidden');
+          setTimeout(() => feedback.classList.add('hidden'), 5000);
+        }
+      };
+
+      const fallbackTextarea = () => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (_) {}
+        document.body.removeChild(ta);
+        finishCopy();
+      };
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(finishCopy).catch(fallbackTextarea);
+      } else {
+        fallbackTextarea();
+      }
+    }
+
+    function launchWhatsappHandoff(url) {
+      const readyBanner = document.getElementById('whatsappReadyBanner');
+      const directAnchor = document.getElementById('directWhatsappAnchor');
+      if (directAnchor) directAnchor.href = url;
+      if (readyBanner) readyBanner.classList.remove('hidden');
+
+      const popup = window.open(url, '_blank', 'noopener,noreferrer');
+      if (popup) return;
+
+      const syntheticLink = document.createElement('a');
+      syntheticLink.href = url;
+      syntheticLink.target = '_blank';
+      syntheticLink.rel = 'noopener noreferrer';
+      syntheticLink.style.display = 'none';
+      document.body.appendChild(syntheticLink);
+      syntheticLink.click();
+      document.body.removeChild(syntheticLink);
+    }
+
+    reservationForm.addEventListener('submit', event => {
+      event.preventDefault();
+      const errorBox = document.getElementById('bookingError');
+      errorBox.classList.add('hidden');
+
+      if (!reservationForm.reportValidity()) return;
+
+      const name = document.getElementById('resName').value.trim();
+      const phone = document.getElementById('resPhone').value.trim();
+      const date = document.getElementById('resDate').value;
+
+      if (!name || !phone || !date) {
+        errorBox.textContent = 'Please complete your name, WhatsApp contact number, and preferred date.';
+        errorBox.classList.remove('hidden');
+        return;
+      }
+
+      const message = buildWhatsappMessage();
+      const url = buildWhatsappUrl(message);
+      launchWhatsappHandoff(url);
+    });
+
+    const galleryItems = [
+      { src: 'IMG_8896_beb93e.jpg', caption: 'Mirrored Shelves & Woven Rattan Pendant' },
+      { src: 'IMG_8895_beb93e.jpg', caption: 'Warm Slatted Timber & Exposed Brick Sanctuary' },
+      { src: 'IMG_3964.jpeg', caption: 'Crochet-Edged Linen Table & Timber Screen' },
+      { src: 'IMG_8893_beb93e.jpg', caption: 'Inner Alcove Teak Tables & Colonial French Doors' },
+      { src: 'IMG_8894_beb93e.jpg', caption: 'Evening Warm Glow Across Our Four Tables' },
+      { src: 'Breakfast.jpg', caption: 'Morning Breakfast — Ceylon Milk Tea, Waffles & Fresh Highland Fruit' },
+      { src: 'Breakfast2.jpg', caption: 'Morning Breakfast — Steaming Ceylon Tea & Homemade Rotis' },
+      { src: 'Breakfast3.jpg', caption: 'Morning Breakfast — Mist Lifting Through the Colonial French Doors' },
+      { src: 'Breakfast4.jpg', caption: 'Morning Breakfast — Freshly Griddled Rotis & Homemade Curries' },
+      { src: 'Breakfast5.jpeg', caption: 'Morning Breakfast — Seeni Sambol, Dhal & Warm Toast on Crochet Linen' },
+      { src: 'Dinner.jpeg', caption: 'Boutique Dinner — Post-Trail Comfort Over Fragrant Yellow Rice' },
+      { src: 'Rustique_Dinner.jpg', caption: 'Boutique Dinner — Evening Toast Across Our Four Intimate Tables' }
+    ];
+    let currentLightboxIndex = 0;
+
+    function openLightbox(index) {
+      currentLightboxIndex = index;
+      const modal = document.getElementById('lightboxModal');
+      document.getElementById('lightboxImg').src = galleryItems[index].src;
+      document.getElementById('lightboxCaption').textContent = galleryItems[index].caption;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex', 'is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function stepLightbox(delta) {
+      currentLightboxIndex = (currentLightboxIndex + delta + galleryItems.length) % galleryItems.length;
+      const img = document.getElementById('lightboxImg');
+      img.style.animation = 'none';
+      void img.offsetWidth;
+      img.style.animation = '';
+      img.src = galleryItems[currentLightboxIndex].src;
+      document.getElementById('lightboxCaption').textContent = galleryItems[currentLightboxIndex].caption;
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById('lightboxModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex', 'is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', event => {
+      const lightbox = document.getElementById('lightboxModal');
+      if (!lightbox.classList.contains('hidden')) {
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowRight') stepLightbox(1);
+        if (event.key === 'ArrowLeft') stepLightbox(-1);
+        return;
+      }
+      if (event.key === 'Escape' && !reservationPage.classList.contains('hidden')) {
+        closeBookingModal();
+      }
+    });
+
+    const weatherCodeMap = {
+      0: ['Clear Highland Skies', '☀️'],
+      1: ['Mostly Clear', '🌤️'],
+      2: ['Partly Cloudy', '⛅'],
+      3: ['Overcast Mist', '☁️'],
+      45: ['Misty Highlands', '🌫️'],
+      48: ['Dense Highland Fog', '🌫️'],
+      51: ['Light Mountain Drizzle', '🌦️'],
+      53: ['Gentle Drizzle', '🌦️'],
+      55: ['Steady Drizzle', '🌧️'],
+      61: ['Light Highland Rain', '🌦️'],
+      63: ['Mountain Rain', '🌧️'],
+      65: ['Heavy Highland Rain', '🌧️'],
+      80: ['Passing Rain Showers', '🌦️'],
+      81: ['Rain Showers', '🌧️'],
+      82: ['Heavy Showers', '🌧️'],
+      95: ['Highland Thunderstorm', '⛈️']
+    };
+
+    async function loadHighlandWeather() {
+      const refreshBtn = document.getElementById('weatherRefresh');
+      const descEl = document.getElementById('weatherDescription');
+      refreshBtn.disabled = true;
+      refreshBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i>Updating…';
+
+      try {
+        const url = 'https://api.open-meteo.com/v1/forecast?latitude=6.9497&longitude=80.7891' +
+          '&current=temperature_2m,relative_humidity_2m,precipitation,weather_code,wind_speed_10m' +
+          '&hourly=precipitation_probability&forecast_days=2&timezone=Asia%2FColombo';
+        const controller = new AbortController();
+        const timer = setTimeout(() => controller.abort(), 9000);
+        let res;
+        try {
+          res = await fetch(url, { cache: 'no-store', signal: controller.signal });
+        } finally {
+          clearTimeout(timer);
+        }
+        if (!res.ok) throw new Error('Weather unavailable');
+        const data = await res.json();
+        const current = data.current;
+        const [label, icon] = weatherCodeMap[current.weather_code] || ['Cool Highland Breeze', '🌥️'];
+
+        document.getElementById('weatherTemp').textContent = `${Math.round(current.temperature_2m)}°C`;
+        document.getElementById('weatherIcon').textContent = icon;
+        descEl.textContent = label;
+        document.getElementById('weatherHumidity').textContent = `${current.relative_humidity_2m}%`;
+        document.getElementById('weatherWind').textContent = `${Math.round(current.wind_speed_10m)} km/h`;
+        document.getElementById('weatherRain').textContent = `${Number(current.precipitation).toFixed(1)} mm`;
+
+        const hourlyTimes = data.hourly.time;
+        let idx = hourlyTimes.indexOf(current.time);
+        if (idx < 0) idx = hourlyTimes.findIndex(t => t.slice(0, 13) === current.time.slice(0, 13));
+        const chance = idx >= 0 ? data.hourly.precipitation_probability[idx] : null;
+        document.getElementById('weatherChance').textContent = chance == null ? '—' : `${chance}%`;
+
+        const formattedTime = new Intl.DateTimeFormat('en-GB', {
+          timeZone: 'Asia/Colombo',
+          hour: '2-digit',
+          minute: '2-digit'
+        }).format(new Date(current.time));
+        document.getElementById('weatherUpdated').textContent = `Updated at ${formattedTime} Sri Lanka time`;
+      } catch (_) {
+        descEl.textContent = 'Highland forecast temporarily offline';
+        document.getElementById('weatherUpdated').textContent = 'Check your connection and tap Refresh Weather.';
+      } finally {
+        refreshBtn.disabled = false;
+        refreshBtn.innerHTML = '<i class="fa-solid fa-rotate-right mr-1"></i>Refresh Weather';
+      }
+    }
+    loadHighlandWeather();
+    setInterval(loadHighlandWeather, 10 * 60 * 1000);
+
+    let audioCtx = null;
+    let soundNodes = [];
+    let masterGain = null;
+    let soundGeneration = 0;
+
+    function clearSoundNodes() {
+      soundNodes.forEach(node => {
+        try { if (node.stop) node.stop(); } catch (_) {}
+        try { node.disconnect(); } catch (_) {}
+      });
+      soundNodes = [];
+      if (masterGain) {
+        try { masterGain.disconnect(); } catch (_) {}
+        masterGain = null;
+      }
+      document.querySelectorAll('.sound-button').forEach(btn => btn.setAttribute('aria-pressed', 'false'));
+      document.getElementById('soundCard').classList.remove('eq-playing');
+    }
+
+    function stopHighlandSound() {
+      soundGeneration++;
+      clearSoundNodes();
+      document.getElementById('soundStatus').textContent = 'Soundscape paused';
+      document.getElementById('soundIcon').textContent = '🔇';
+    }
+
+    function changeSoundVolume(val) {
+      document.getElementById('volumeValue').textContent = `${val}%`;
+      if (masterGain && audioCtx) {
+        masterGain.gain.setTargetAtTime(Number(val) / 100, audioCtx.currentTime, 0.08);
+      }
+    }
+
+    async function playHighlandSound(mode) {
+      const gen = ++soundGeneration;
+      clearSoundNodes();
+      const status = document.getElementById('soundStatus');
+      const icon = document.getElementById('soundIcon');
+      const labels = {
+        rain: ['Gentle Highland Rain', '🌧️'],
+        wind: ['Nuwara Eliya Mountain Breeze', '🍃'],
+        both: ['Highland Rain & Mist', '🌫️']
+      };
+
+      try {
+        const AudioEngine = window.AudioContext || window.webkitAudioContext;
+        if (!AudioEngine) throw new Error('Audio unsupported');
+        if (!audioCtx || audioCtx.state === 'closed') audioCtx = new AudioEngine();
+        if (audioCtx.state === 'suspended') await audioCtx.resume();
+        if (gen !== soundGeneration) return;
+
+        const master = audioCtx.createGain();
+        master.gain.value = Number(document.getElementById('soundVolume').value) / 100;
+        master.connect(audioCtx.destination);
+        masterGain = master;
+
+        const createNoiseBuffer = () => {
+          const length = audioCtx.sampleRate * 4;
+          const buffer = audioCtx.createBuffer(1, length, audioCtx.sampleRate);
+          const data = buffer.getChannelData(0);
+          let last = 0;
+          for (let i = 0; i < length; i++) {
+            const white = Math.random() * 2 - 1;
+            last = last * 0.2 + white * 0.8;
+            data[i] = last;
+          }
+          return buffer;
+        };
+
+        if (mode === 'rain' || mode === 'both') {
+          const src = audioCtx.createBufferSource();
+          src.buffer = createNoiseBuffer();
+          src.loop = true;
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.value = 3000;
+          const gain = audioCtx.createGain();
+          gain.gain.value = mode === 'both' ? 0.34 : 0.48;
+          src.connect(filter);
+          filter.connect(gain);
+          gain.connect(master);
+          src.start();
+          soundNodes.push(src, filter, gain);
+        }
+
+        if (mode === 'wind' || mode === 'both') {
+          const src = audioCtx.createBufferSource();
+          src.buffer = createNoiseBuffer();
+          src.loop = true;
+          const filter = audioCtx.createBiquadFilter();
+          filter.type = 'lowpass';
+          filter.frequency.value = 430;
+          const gain = audioCtx.createGain();
+          gain.gain.value = mode === 'both' ? 0.25 : 0.38;
+          const lfo = audioCtx.createOscillator();
+          const lfoGain = audioCtx.createGain();
+          lfo.type = 'sine';
+          lfo.frequency.value = 0.09;
+          lfoGain.gain.value = 0.12;
+          lfo.connect(lfoGain);
+          lfoGain.connect(gain.gain);
+          src.connect(filter);
+          filter.connect(gain);
+          gain.connect(master);
+          src.start();
+          lfo.start();
+          soundNodes.push(src, filter, gain, lfo, lfoGain);
+        }
+
+        if (gen !== soundGeneration) {
+          clearSoundNodes();
+          return;
+        }
+        status.textContent = labels[mode][0];
+        icon.textContent = labels[mode][1];
+        document.getElementById('soundCard').classList.add('eq-playing');
+        document.querySelectorAll('.sound-button').forEach(btn => {
+          btn.setAttribute('aria-pressed', String(btn.dataset.sound === mode));
+        });
+      } catch (_) {
+        clearSoundNodes();
+        status.textContent = 'Unable to start audio in this browser.';
+        icon.textContent = '🔇';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const revealEls = document.querySelectorAll('.reveal-block, .stagger-group');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const io = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        revealEls.forEach(el => io.observe(el));
+      } else {
+        revealEls.forEach(el => el.classList.add('is-visible'));
+      }
+    });
+
+    const siteHeader = document.getElementById('siteHeader');
+    const progressBar = document.getElementById('scrollProgress');
+    const backTopBtn = document.getElementById('backToTop');
+    let scrollTick = false;
+
+    function syncHeaderScrollState() {
+      const currentY = window.scrollY;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = maxScroll > 0 ? (currentY / maxScroll) * 100 : 0;
+      progressBar.style.width = `${pct}%`;
+      backTopBtn.classList.toggle('visible', currentY > 520);
+      if (siteHeader) siteHeader.classList.toggle('is-scrolled', currentY > 420);
+    }
+
+    syncHeaderScrollState();
+    window.addEventListener('scroll', () => {
+      if (scrollTick) return;
+      scrollTick = true;
+      requestAnimationFrame(() => {
+        syncHeaderScrollState();
+        scrollTick = false;
+      });
+    }, { passive: true });
+
+    const navLinks = Array.from(document.querySelectorAll('header .nav-link[href^="#"]'));
+    if ('IntersectionObserver' in window) {
+      const navObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => {
+              if (link.getAttribute('href') === `#${entry.target.id}`) {
+                link.setAttribute('aria-current', 'location');
+              } else {
+                link.removeAttribute('aria-current');
+              }
+            });
+          }
+        });
+      }, { rootMargin: '-35% 0px -55% 0px' });
+      document.querySelectorAll('main section[id]').forEach(sec => navObserver.observe(sec));
+    }
+
+    document.getElementById('copyrightYear').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
